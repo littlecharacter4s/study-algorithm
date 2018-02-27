@@ -9,30 +9,26 @@ public class RedBlackTreeTest {
         rbTree.insert(11);
         rbTree.printTree();
         System.out.println("-----------------------------");
-        rbTree.insert(2);
+        rbTree.insert(8);
         rbTree.printTree();
         System.out.println("-----------------------------");
-        rbTree.insert(14);
+        rbTree.insert(18);
         rbTree.printTree();
         System.out.println("-----------------------------");
-        rbTree.insert(1);
+        rbTree.insert(16);
         rbTree.printTree();
         System.out.println("-----------------------------");
-        rbTree.insert(7);
+        rbTree.insert(20);
         rbTree.printTree();
         System.out.println("-----------------------------");
         rbTree.insert(15);
         rbTree.printTree();
         System.out.println("-----------------------------");
-        rbTree.insert(5);
+        rbTree.insert(14);
         rbTree.printTree();
         System.out.println("-----------------------------");
-        rbTree.insert(8);
+        rbTree.insert(13);
         rbTree.printTree();
-        System.out.println("-----------------------------");
-        rbTree.insert(4);
-        rbTree.printTree();
-        System.out.println("-----------------------------");
     }
 
     @Test

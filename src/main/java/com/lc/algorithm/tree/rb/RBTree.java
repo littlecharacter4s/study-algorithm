@@ -3,26 +3,6 @@ package com.lc.algorithm.tree.rb;
 import java.util.Comparator;
 
 public class RBTree<E extends Comparable<? super E>> {
-    private static class Node<E>{
-        E e;
-        boolean color;
-        Node<E> left;
-        Node<E> right;
-        Node<E> parent;
-
-        public Node(E e, boolean color, Node<E> left, Node<E> right, Node<E> parent){
-            this.e = e;
-            this.color = color;
-            this.left = left;
-            this.right = right;
-            this.parent = parent;
-        }
-
-        public boolean isRead(){
-            return color;
-        }
-    }
-
     public static final boolean RED = true;
     public static final boolean BLACK = false;
 
@@ -31,17 +11,6 @@ public class RBTree<E extends Comparable<? super E>> {
     private final Node<E> ROOT;//指向伪根节点的引用
     private int size = 0;//节点个数
     Comparator<? super E> cmp;//节点大小的比较器
-
-    //如果调用了不带参数的构造函数，则使用该内部类作为比较器，
-    //但此时泛型E需要继承Comparable接口,否则运行时会抛出异常
-    private static class Cmp<T> implements Comparator<T> {
-        @SuppressWarnings({ "unchecked", "rawtypes" })
-        @Override
-        public int compare(T e1, T e2) {
-            return ((Comparable)e1).compareTo(e2);
-        }
-
-    }
 
     //不带比较器的构造函数
     public RBTree(){
@@ -260,8 +229,7 @@ public class RBTree<E extends Comparable<? super E>> {
             X.color = BLACK;
             ROOT.right.color = BLACK;
             return true;
-        }else
-        if(X.left != NIL){
+        }else if(X.left != NIL){
             if(X == P.left){
                 P.left = X.left;
             }else{
@@ -375,31 +343,44 @@ public class RBTree<E extends Comparable<? super E>> {
         }
     }
 
+    private static class Node<E>{
+        E e;
+        boolean color;
+        Node<E> left;
+        Node<E> right;
+        Node<E> parent;
+
+        public Node(E e, boolean color, Node<E> left, Node<E> right, Node<E> parent){
+            this.e = e;
+            this.color = color;
+            this.left = left;
+            this.right = right;
+            this.parent = parent;
+        }
+
+        public boolean isRead(){
+            return color;
+        }
+    }
+
+    //如果调用了不带参数的构造函数，则使用该内部类作为比较器，
+    //但此时泛型E需要继承Comparable接口,否则运行时会抛出异常
+    private static class Cmp<T> implements Comparator<T> {
+        @SuppressWarnings({ "unchecked", "rawtypes" })
+        @Override
+        public int compare(T e1, T e2) {
+            return ((Comparable)e1).compareTo(e2);
+        }
+
+    }
+
     public static void main(String[] args){
         RBTree<Integer> rbt = new RBTree<Integer>();
-        rbt.insert(50);
-        rbt.insert(25);
-        rbt.insert(75);
-        rbt.insert(10);
-        rbt.insert(30);
-        rbt.insert(27);
-        rbt.insert(35);
-        rbt.insert(40);
-        rbt.insert(31);
-        rbt.insert(55);
-        rbt.insert(80);
-        rbt.insert(90);
-//      rbt.insert(22);
-//      rbt.insert(5);
-//      rbt.delete(5);
-//      rbt.delete(51);
-//      rbt.delete(80);
-//      rbt.delete(50);
-//      rbt.delete(75);
-//      rbt.delete(27);
-//      rbt.delete(10);
-//      rbt.delete(25);
-       // rbt.delete(10);
+        rbt.insert(11);
+        rbt.insert(2);
+        rbt.insert(14);
+        rbt.insert(15);
+        rbt.insert(16);
         rbt.preorderTraverse();
         System.out.println();
         System.out.println("size: " + rbt.size());
