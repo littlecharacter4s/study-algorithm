@@ -199,7 +199,7 @@ public class RedBlackTree<E extends Comparable<? super E>> {
                             brother.setColor(RED);
                             node = parent;
                             parent = node.getParent();
-                            //继续调整
+                            //继续调整-这儿就是先把根节点设置为红色的原因
                         }
                     } else {
                         //红兄(黑侄黑父)：变换一下红黑树的形状，回到黑兄的情况

@@ -377,10 +377,11 @@ public class RBTree<E extends Comparable<? super E>> {
     public static void main(String[] args){
         RBTree<Integer> rbt = new RBTree<Integer>();
         rbt.insert(11);
-        rbt.insert(2);
-        rbt.insert(14);
+        rbt.insert(6);
         rbt.insert(15);
-        rbt.insert(16);
+        rbt.insert(3);
+        rbt.delete(3);
+        rbt.delete(6);
         rbt.preorderTraverse();
         System.out.println();
         System.out.println("size: " + rbt.size());
