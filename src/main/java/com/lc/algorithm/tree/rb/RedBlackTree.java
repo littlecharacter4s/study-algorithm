@@ -1,7 +1,5 @@
 package com.lc.algorithm.tree.rb;
 
-import com.alibaba.fastjson.JSON;
-
 public class RedBlackTree<E extends Comparable<? super E>> {
     public static final int RED = 0;
     public static final int BLACK = 1;
@@ -154,8 +152,13 @@ public class RedBlackTree<E extends Comparable<? super E>> {
             } else {
                 parent.setRight(NIL);
             }
-            //只有删除节点是黑色节点时才调整树
-            if (node.getColor() == BLACK) {
+            if (node.getColor() == RED) {
+                //删除节点是红色节点时无需调整
+                root.setColor(BLACK);
+                return;
+            } else {
+                node = NIL;
+                //删除节点是黑色节点时才调整树
                 while (true) {
                     RedBlackNode<E> brother = node == parent.getLeft() ? parent.getRight() : parent.getLeft();
                     RedBlackNode<E> leftNephew = brother.getLeft();
@@ -240,7 +243,7 @@ public class RedBlackTree<E extends Comparable<? super E>> {
         if (node == NIL) {
             return;
         }
-        System.out.println(JSON.toJSONString(node));
+        System.out.println("E:" + node.getElement() + ", C:" + node.getColor() + ", L:" + node.getLeft().getElement() + ", R:" + node.getRight().getElement());
         this.printTree(node.getLeft());
         this.printTree(node.getRight());
     }

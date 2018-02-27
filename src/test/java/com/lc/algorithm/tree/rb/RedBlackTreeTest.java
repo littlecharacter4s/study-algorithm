@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class RedBlackTreeTest {
     @Test
-    public void insert() throws Exception {
+    public void testInsert() throws Exception {
         RedBlackTree<Integer> rbTree = new RedBlackTree<>();
         rbTree.insert(11);
         rbTree.printTree();
@@ -32,33 +32,62 @@ public class RedBlackTreeTest {
     }
 
     @Test
-    public void test() throws Exception {
+    public void testRemove() throws Exception {
         RedBlackTree<Integer> rbTree = new RedBlackTree<>();
+        System.out.println("insert:11--------------------");
         rbTree.insert(11);
         rbTree.printTree();
         System.out.println("-----------------------------");
-        rbTree.insert(9);
-        rbTree.printTree();
-        System.out.println("-----------------------------");
-        rbTree.insert(14);
-        rbTree.printTree();
-        System.out.println("-----------------------------");
-        rbTree.insert(7);
-        rbTree.printTree();
-        System.out.println("-----------------------------");
-        rbTree.insert(10);
-        rbTree.printTree();
-        System.out.println("-----------------------------");
-        rbTree.insert(15);
-        rbTree.printTree();
-        System.out.println("-----------------------------");
-        rbTree.insert(5);
-        rbTree.printTree();
-        System.out.println("-----------------------------");
+        System.out.println("insert:8---------------------");
         rbTree.insert(8);
         rbTree.printTree();
         System.out.println("-----------------------------");
-        rbTree.insert(4);
+        System.out.println("insert:18--------------------");
+        rbTree.insert(18);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("insert:16--------------------");
+        rbTree.insert(16);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("insert:20--------------------");
+        rbTree.insert(20);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("insert:15--------------------");
+        rbTree.insert(15);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("insert:14--------------------");
+        rbTree.insert(14);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("insert:13--------------------");
+        rbTree.insert(13);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("remove:13--------------------");
+        rbTree.remove(13);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("insert:13--------------------");
+        rbTree.insert(13);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("remove:14--------------------");
+        rbTree.remove(14);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("insert:14--------------------");
+        rbTree.insert(14);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("remove:11--------------------");
+        rbTree.remove(11);
+        rbTree.printTree();
+        System.out.println("-----------------------------");
+        System.out.println("insert:11--------------------");
+        rbTree.insert(11);
         rbTree.printTree();
         System.out.println("-----------------------------");
     }
