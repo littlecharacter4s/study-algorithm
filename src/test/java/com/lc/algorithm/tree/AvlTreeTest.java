@@ -1,5 +1,6 @@
-package com.lc.algorithm.tree.avl;
+package com.lc.algorithm.tree;
 
+import com.lc.algorithm.tree.AvlTree;
 import org.junit.Test;
 
 public class AvlTreeTest {

@@ -1,4 +1,4 @@
-package com.lc.algorithm.tree;
+package com.lc.algorithm.heap;
 
 import java.util.Arrays;
 
@@ -11,8 +11,8 @@ import java.util.Arrays;
  * 2.完全二叉树只有数组下标小于或等于[(数组长度 / 2) - 1]的元素有子节点
  * 3.父节点下标[i]和子节点下标[jl,jr]的关系{
  *     i = (j - 1) >>> 1;
- *     jl = ((i + 1) <<< 1) - 1;
- *     jr = (i + 1) <<< 1;
+ *     jl = ((i + 1) << 1) - 1;
+ *     jr = (i + 1) << 1;
  * }
  * 注：这里以Integer类型的最小堆为例，只实现offer，peek，poll方法
  */

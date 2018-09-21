@@ -1,4 +1,4 @@
-package com.lc.algorithm.tree.rb;
+package com.lc.algorithm.tree;
 
 import java.util.Comparator;
 

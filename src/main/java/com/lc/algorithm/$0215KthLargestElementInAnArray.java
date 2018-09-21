@@ -1,6 +1,6 @@
 package com.lc.algorithm;
 
-public class KthLargestElementInAnArray215 {
+public class $0215KthLargestElementInAnArray {
     public int findKthLargestElement(int[] elements, int k) {
         if (k > elements.length || k < 1) {
             return Integer.MIN_VALUE;

@@ -1,10 +1,10 @@
-package com.lc.algorithm.tree;
+package com.lc.algorithm.heap;
 
 import org.junit.Test;
 
 public class MinHeapTest {
     @Test
-    public void testMinHeap() {
+    public void testMinHeap() throws Exception {
         MinHeap minHeap = new MinHeap(9);
         minHeap.offer(9);
         minHeap.offer(17);
