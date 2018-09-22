@@ -3,7 +3,7 @@ package com.lc.algorithm;
 /**
  * 问题：判断点是否连通（任意两个点直接或间接连接）
  * 描述：有x个点【x ∈ (0,n]，其中n∈Z】和m条边【[[x₁,x₂],[x₃,x₂]...[xi,xj]]】，判断点是否连通
- * 思路：用并查集来实现（https://baike.baidu.com/item/%E5%B9%B6%E6%9F%A5%E9%9B%86/9388442?fr=aladdin）
+ * 思路：图结构，用并查集来实现（https://baike.baidu.com/item/%E5%B9%B6%E6%9F%A5%E9%9B%86/9388442?fr=aladdin），构造有向连通子图
  * 分析：O(m) + O(n) + O(所有连通子图的深度和) = O(n)
  */
 public class $aaaaJudgeConnectedness {
