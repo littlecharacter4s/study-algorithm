@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.Random;
 
-public class $aaaaJudgeConnectednessTest {
+public class NaaaaJudgeConnectednessTest {
     @Test
     public void testIsConnected() throws Exception {
         int limit = 10;
@@ -28,7 +28,7 @@ public class $aaaaJudgeConnectednessTest {
                 }
             }
             System.out.print("]\n");
-            result = new $aaaaJudgeConnectedness().isConnected(lines, limit);
+            result = new NaaaaJudgeConnectedness().isConnected(lines, limit);
             System.out.println("连通？" + (result ? "是" : "否"));
         }
     }

@@ -7,7 +7,7 @@ import java.util.Map;
  * 思路：图结构，用并查集来实现（https://baike.baidu.com/item/%E5%B9%B6%E6%9F%A5%E9%9B%86/9388442?fr=aladdin），构造有向连通子图
  * 分析：O(n) < 复杂度 < O(n*(n-1))
  */
-public class $0399EvaluateDivision {
+public class N0399EvaluateDivision {
     public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
         Map<String, Integer> paramTable = new HashMap<>();
         int length = 0;
@@ -45,12 +45,16 @@ public class $0399EvaluateDivision {
         for (int i = 0; i < queries.length; i++) {
             Integer p1 = paramTable.get(queries[i][0]);
             Integer p2 = paramTable.get(queries[i][1]);
-            if (p1 == null || p2 == null) result[i] = -1d;
-            else {
+            if (p1 == null || p2 == null) {
+                result[i] = -1d;
+            } else {
                 int p1Root = find(nodes, p1);
                 int p2Root = find(nodes, p2);
-                if (p1Root != p2Root) result[i] = -1d;
-                else result[i] = nodes[p2].value / nodes[p1].value;
+                if (p1Root != p2Root) {
+                    result[i] = -1d;
+                } else {
+                    result[i] = nodes[p2].value / nodes[p1].value;
+                }
             }
         }
         return result;

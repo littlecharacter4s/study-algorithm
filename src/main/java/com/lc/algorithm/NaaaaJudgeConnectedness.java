@@ -6,7 +6,7 @@ package com.lc.algorithm;
  * 思路：图结构，用并查集来实现（https://baike.baidu.com/item/%E5%B9%B6%E6%9F%A5%E9%9B%86/9388442?fr=aladdin），构造有向连通子图
  * 分析：O(m) + O(n) + O(所有连通子图的深度和) = O(n)
  */
-public class $aaaaJudgeConnectedness {
+public class NaaaaJudgeConnectedness {
     /**
      * @param edges {m条边}
      * @param limit {n,x的大小限制}

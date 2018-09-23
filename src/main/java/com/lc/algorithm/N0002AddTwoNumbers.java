@@ -1,6 +1,6 @@
 package com.lc.algorithm;
 
-public class $0002AddTwoNumbers {
+public class N0002AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(0);
         ListNode p = l1;
@@ -14,8 +14,12 @@ public class $0002AddTwoNumbers {
             carry = sum / 10;
             current.next = new ListNode(sum % 10);
             current = current.next;
-            if (p != null) p = p.next;
-            if (q != null) q = q.next;
+            if (p != null) {
+                p = p.next;
+            }
+            if (q != null) {
+                q = q.next;
+            }
         }
         if (carry > 0) {
             current.next = new ListNode(carry);
