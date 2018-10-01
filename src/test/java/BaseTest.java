@@ -7,5 +7,6 @@ public class BaseTest {
     @Test
     public void test() {
         Assert.assertTrue("这只是一个测试", LocalDate.now().getYear() < Integer.MAX_VALUE);
+        System.out.println("xx");
     }
 }
