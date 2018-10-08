@@ -3,7 +3,7 @@ package com.lc.algorithm;
 import com.lc.algorithm.stack.Stack;
 
 /**
- * 计算四则运算表达式
+ * 计算四则运算表达式 - 栈的运用
  * 第一步：将中缀表达转换成后缀表达式；
  * 1.当当前字符为数字时，直接输出；
  * 2.当当前字符为"("时，将其压栈；
