@@ -20,5 +20,8 @@ public class NaaagLurTest {
         for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
             System.out.println(integerIntegerEntry.getKey());
         }
+        map.forEach((key, value) -> {
+            System.out.println(key + ":" + value);
+        });
     }
 }
