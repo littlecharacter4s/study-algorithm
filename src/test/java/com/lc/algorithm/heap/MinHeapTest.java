@@ -1,5 +1,6 @@
 package com.lc.algorithm.heap;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
 public class MinHeapTest {
@@ -15,6 +16,8 @@ public class MinHeapTest {
         minHeap.offer(36);
         minHeap.offer(30);
         minHeap.offer(25);
+        int[] elements = minHeap.getElements();
+        System.out.println(JSON.toJSONString(elements));
         while (minHeap.size() != 0) {
             System.out.println(minHeap.poll());
         }

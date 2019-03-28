@@ -52,10 +52,15 @@ public class MinHeap {
         int i = --size;
         int x = elements[i];
         elements = Arrays.copyOf(elements, i);
+        //System.out.println(JSON.toJSONString(elements));
         if (i != 0) {
             this.siftDown(0, x);
         }
         return result;
+    }
+
+    public int[] getElements() {
+        return elements;
     }
 
     public int size() {
@@ -122,7 +127,7 @@ public class MinHeap {
             int left = ((i + 1) << 1) - 1;
             int right = (i + 1) << 1;
             // 最后一个有子节点的节点可能没有右节点，这里处理一下防止越界
-            right  = right >= size ? left : right;
+            right = right >= size ? left : right;
             int min = elements[left] > elements[right] ? right : left;
             if (x <= elements[min]) {
                 break;
