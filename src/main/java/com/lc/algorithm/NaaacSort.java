@@ -2,7 +2,7 @@ package com.lc.algorithm;
 
 public class NaaacSort {
     /**
-     * 冒泡排序
+     * 冒泡排序（优化版）
      *
      * @param array 待排序数组
      */
@@ -22,6 +22,48 @@ public class NaaacSort {
             }
         } while (change);
     }
+
+    /**
+     * 选择排序（优化版）
+     *
+     * @param array 待排序数组
+     */
+    public void selectionSort(int[] array) {
+        for (int i = 0, j = array.length - 1; i < j; i++, j--) {
+            int min = i;
+            int max = j;
+            for (int k = i; k <= j; k++) {
+                if (array[k] < array[min]) {
+                    min = k;
+                }
+                if (array[k] > array[max]) {
+                    max = k;
+                }
+            }
+            if (min == j && max == i) {
+                int temp = array[min];
+                array[min] = array[max];
+                array[max] = temp;
+            } else if (min == j) {
+                int minTemp = array[i];
+                array[i] = array[min];
+                array[min] = minTemp;
+
+                int maxTemp = array[j];
+                array[j] = array[max];
+                array[max] = maxTemp;
+            } else {
+                int maxTemp = array[j];
+                array[j] = array[max];
+                array[max] = maxTemp;
+
+                int minTemp = array[i];
+                array[i] = array[min];
+                array[min] = minTemp;
+            }
+        }
+    }
+
 
     /**
      * 插入排序
