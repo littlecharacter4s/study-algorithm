@@ -7,8 +7,6 @@ import java.util.HashSet;
  * 用{011,101,110}和{101,110,111}来理解，一点点确定最大值（从高位到地位）
  */
 public class N0421MaximumXORofTwoNumbersInAnArray {
-    TrieNode root;
-
     public int findMaximumXOR(int[] nums) {
         int max = 0;
         int mask = 0;
@@ -29,53 +27,54 @@ public class N0421MaximumXORofTwoNumbersInAnArray {
     }
 
     public int findMaximumXOREfficient(int[] nums) {
-        // 应该是用hashmap做前缀树在这道题中大材小用了，可以用二叉的，导致了超时，单个case可以过。
-        if (nums.length >= 1 && nums[0] == 981420494) {
-            return 2147483644;
-        }
-        root = new TrieNode();
-        for (int i : nums) {
+        TrieNode root = new TrieNode();
+        // 将数组值从高位到地位构建字典树
+        for (int num : nums) {
             TrieNode tpnode = root;
             for (int j = 31; j >= 0; --j) {
-                int flag = (i & (1 << j)) == 0 ? 0 : 1;
-                // int flag = i&(1<<j);
-                if (tpnode.map.containsKey(flag)) {
-                    tpnode = tpnode.map.get(flag);
+                // 注意这两个flag的差别
+                int flag = (num & (1 << j)) == 0 ? 0 : 1;
+                if (tpnode.children.containsKey(flag)) {
+                    tpnode = tpnode.children.get(flag);
                 } else {
                     TrieNode newnode = new TrieNode();
-                    tpnode.map.put(flag, newnode);
+                    tpnode.children.put(flag, newnode);
                     tpnode = newnode;
                 }
             }
         }
-
         int max = 0;
-        for (int i : nums) {
-            max = Math.max(max, getmax(i, root));
+        for (int num : nums) {
+            // 其实就是用暴力思路求最大异或值，
+            // 只不过用字典树(0,1)从高位到地位存储数组元素，计算异或时就不用再遍历一遍数组
+            // 利用字典树这种结构将时间复杂度降低为O(n)
+            max = Math.max(max, getmax(num, root));
         }
         return max;
     }
 
-    private int getmax(int x, TrieNode node) {
-        TrieNode root = node;
-        int res = 0;//本来就是0
+    private int getmax(int num, TrieNode root) {
+        TrieNode node = root;
+        int result = 0;
         for (int j = 31; j >= 0; --j) {
-            int flag = (x & (1 << j)) == 0 ? 1 : 0;
-            if (root.map.containsKey(flag)) {
-                root = root.map.get(flag);
-                res |= (1 << j);//将某一位 置1
+            // 注意这个两个flag的差别
+            int flag = (num & (1 << j)) == 0 ? 1 : 0;
+            if (node.children.containsKey(flag)) {
+                node = node.children.get(flag);
+                // 将当前位置1
+                result |= (1 << j);
             } else {
-                root = root.map.get(1 - flag);
+                node = node.children.get(1 - flag);
             }
         }
-        return res;
+        return result;
     }
 
     private class TrieNode {
-        HashMap<Integer, TrieNode> map;
+        HashMap<Integer, TrieNode> children;
 
         public TrieNode() {
-            map = new HashMap<Integer, TrieNode>();
+            children = new HashMap<>();
         }
     }
 }
