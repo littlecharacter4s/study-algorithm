@@ -127,7 +127,7 @@ public class MinHeap {
             int left = ((i + 1) << 1) - 1;
             int right = (i + 1) << 1;
             // 最后一个有子节点的节点可能没有右节点，这里处理一下防止越界
-            right = right >= size ? left : right;
+            right = right < size ? right : left;
             int min = elements[left] > elements[right] ? right : left;
             if (x <= elements[min]) {
                 break;
