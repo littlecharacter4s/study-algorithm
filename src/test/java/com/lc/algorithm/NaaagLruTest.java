@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import java.util.Map;
 
-public class NaaagLurTest {
+public class NaaagLruTest {
     @Test
     public void testLur() throws Exception {
         //指定缓存最大容量为4
-        Map<Integer,Integer> map=new NaaagLur<>(4);
+        Map<Integer,Integer> map=new NaaagLru<>(4);
         map.put(9,3);
         map.put(7,4);
         map.put(5,9);

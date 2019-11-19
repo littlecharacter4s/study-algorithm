@@ -3,12 +3,12 @@ package com.lc.algorithm;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class NaaagLur<K, V> extends LinkedHashMap<K, V> {
+public class NaaagLru<K, V> extends LinkedHashMap<K, V> {
     //定义缓存的容量
     private int capacity;
     private static final long serialVersionUID = 1L;
     //带参数的构造器
-    NaaagLur(int capacity){
+    NaaagLru(int capacity){
         //调用LinkedHashMap的构造器，传入以下参数
         super(16,0.75f,true);
         //传入指定的缓存最大容量
