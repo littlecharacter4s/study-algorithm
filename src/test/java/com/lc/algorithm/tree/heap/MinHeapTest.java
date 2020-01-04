@@ -1,4 +1,4 @@
-package com.lc.algorithm.heap;
+package com.lc.algorithm.tree.heap;
 
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
