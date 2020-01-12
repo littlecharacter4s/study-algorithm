@@ -21,8 +21,9 @@ public class NC0009WeightedRoundRobinTest {
         serverList.clear();
         serverList.add(new NC0009WeightedRoundRobin.Server(1, "server-1"));
         serverList.add(new NC0009WeightedRoundRobin.Server(2, "server-2"));
+        serverList.add(new NC0009WeightedRoundRobin.Server(2, "server-3"));
         weightedRoundRobin.reinitialization(serverList);
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println(JSON.toJSONString(weightedRoundRobin.getServer1()));
         }
         System.out.println("--------------------------------------------------------");
