@@ -30,5 +30,6 @@ public class NC0003SortTest {
         int[] result = new int[n.length];
         new NC0003Sort().mergeSortRecursive(n, result, 0, n.length - 1);
         System.out.println(JSON.toJSONString(result));
+        System.out.println(JSON.toJSONString(n));
     }
 }

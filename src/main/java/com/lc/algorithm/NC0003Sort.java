@@ -1,5 +1,7 @@
 package com.lc.algorithm;
 
+import com.alibaba.fastjson.JSON;
+
 public class NC0003Sort {
     /**
      * 冒泡排序（优化版）
@@ -117,6 +119,7 @@ public class NC0003Sort {
             } else if (i == j) {
                 ++i;
             }
+            // 剩下一种情况就是i > j，结束循环
         }
         quickSort(array, head, j);
         quickSort(array, i, tail);
@@ -143,18 +146,23 @@ public class NC0003Sort {
         mergeSortRecursive(arr, result, start1, end1);
         mergeSortRecursive(arr, result, start2, end2);
         int k = start;
+        // 开始归并
         while (start1 <= end1 && start2 <= end2) {
             result[k++] = arr[start1] < arr[start2] ? arr[start1++] : arr[start2++];
         }
+        // 结果补全
         while (start1 <= end1) {
             result[k++] = arr[start1++];
         }
+        // 结果补全
         while (start2 <= end2) {
             result[k++] = arr[start2++];
         }
+        // 每次归并保证当前部分有序，因为下次归并在“开始归并处”会用到
         for (k = start; k <= end; k++) {
             arr[k] = result[k];
         }
+        System.out.println(JSON.toJSONString(arr));
     }
 
     /**
