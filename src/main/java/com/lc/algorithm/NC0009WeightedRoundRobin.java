@@ -6,7 +6,6 @@ import java.util.Objects;
 
 /**
  * Nginx加权轮询算法的Java实现
- * https://blog.csdn.net/weixin_34174132/article/details/87466990
  * 两点：
  * 1、每轮取当前权重最大的节点；
  * 2、每轮每个节点的当前节点权重都要加上初始权重，就是为了每轮下来，所有节点的当前节点之和等于所有节点的初始权重之和
@@ -34,18 +33,20 @@ public class NC0009WeightedRoundRobin {
     }
 
     public synchronized Server getServer1() {
+        // 初始权重的总权重，其实可以设置成全局的，有节点增、删、改，重新计算
         int totalWeight = 0;
         Server maxServer = null;
         for (Server server : serverList) {
             totalWeight += server.getWeight();
-            // 每个节点的当前权重要加上原始的权重
+            // 当前权重 = 当前权重 + 原始权重
             server.setCurrentWeight(server.getCurrentWeight() + server.getWeight());
-            // 保存当前权重最大的节点
+            // 保存 当前权重 最大的节点
             if (maxServer == null || maxServer.getCurrentWeight() < server.getCurrentWeight()) {
                 maxServer = server;
             }
         }
-        // 被选中的节点权重减掉总权重
+        System.out.println("总权重：" + totalWeight);
+        // 被选中的节点，当前权重 = 当前权重 - 总权重
         maxServer.setCurrentWeight(maxServer.getCurrentWeight() - totalWeight);
         return maxServer;
     }

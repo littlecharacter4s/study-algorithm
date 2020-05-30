@@ -23,8 +23,9 @@ public class NC0008Snowflake {
 
     /**
      * 获取id
+     *
      * @param datecenterId {5bit,32}
-     * @param workerId {5bit,32}
+     * @param workerId     {5bit,32}
      * @return
      * 示例：0 + relativeTimestamp(6300852737) + datecenterId(1) + workerId(1) + sequence(6)
      *      0 + 00000000101110111100011110110001000000001 + 00001 + 00001 + 000000000110 = 26427691838345222
@@ -37,7 +38,7 @@ public class NC0008Snowflake {
         long timestamp = System.currentTimeMillis();
         while (timestamp < lastTimestamp) {
             try {
-                TimeUnit.MILLISECONDS.sleep(1L);
+                TimeUnit.MILLISECONDS.sleep(lastTimestamp - timestamp);
                 timestamp = System.currentTimeMillis();
             } catch (InterruptedException e) {
                 e.printStackTrace();

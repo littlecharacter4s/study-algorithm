@@ -44,6 +44,7 @@ public class NC0007Lfu <K, V> extends HashMap<K, V> {
 
     private K getLeastFrequentKey() {
         // 这种方式每次找要淘汰的Key时间复杂度都是O(n)
+        // 维护一个逆序数组，可以将时间复杂度降低到O(logn)
         HitRate min = Collections.min(km.values());
         return min.key;
     }

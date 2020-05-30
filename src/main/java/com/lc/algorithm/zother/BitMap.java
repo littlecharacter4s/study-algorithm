@@ -31,7 +31,7 @@ public class BitMap {
         }
         // n/8得到byte[]的index
         int index = n >>> 3;
-        // n%8得到在byte[index]上的位置position
+        // n%8( 等价于n&(8-1) )得到在byte[index]上的位置position
         int position = n & 0x07;
         /*
          * 将1左移position后和bytes[index]做【或】运算，就把n插入到了BitMap中
