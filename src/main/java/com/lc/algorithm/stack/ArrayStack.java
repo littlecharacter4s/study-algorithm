@@ -3,10 +3,10 @@ package com.lc.algorithm.stack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stack<E> {
+public class ArrayStack<E> {
     private List<E> list;
 
-    public Stack() {
+    public ArrayStack() {
         list = new ArrayList<>();
     }
 

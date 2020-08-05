@@ -1,6 +1,6 @@
 package com.lc.algorithm;
 
-import com.lc.algorithm.stack.Stack;
+import com.lc.algorithm.stack.ArrayStack;
 
 /**
  * 计算四则运算表达式 - 栈的运用
@@ -34,13 +34,13 @@ public class NC0005CalculateArithmeticExpression {
     private String convert(String expression) {
         StringBuilder sb = new StringBuilder();
         char[] characters = expression.toCharArray();
-        Stack<Character> stack = new Stack<>();
+        ArrayStack<Character> arrayStack = new ArrayStack<>();
         for (int i = 0; i < characters.length; i++) {
             if ('0' <= characters[i] && characters[i] <= '9') {
                 sb.append(characters[i]);
             }
             if (characters[i] == '(') {
-                stack.push(characters[i]);
+                arrayStack.push(characters[i]);
             }
             // 未完待续...
         }

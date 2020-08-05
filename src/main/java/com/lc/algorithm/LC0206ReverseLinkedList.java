@@ -5,16 +5,16 @@ public class LC0206ReverseLinkedList {
         if (head == null) {
             return null;
         }
-        ListNode pro = head;
-        ListNode pre = null;
-        ListNode next;
-        while (pro != null) {
-            next = pro.next;
-            pro.next = pre;
-            pre = pro;
-            pro = next;
+        ListNode before = null;
+        ListNode current = head;
+        ListNode after;
+        while (current != null) {
+            after = current.next;
+            current.next = before;
+            before = current;
+            current = after;
         }
-        return pre;
+        return before;
     }
 
     static class ListNode {
