@@ -1,14 +1,18 @@
 package com.lc.algorithm.queue;
 
+/**
+ * 尾进头出
+ * @param <T>
+ */
 public class CircleQueue<T> {
-    private final int LEN;
+    private final int capacity;
     private int head = 0;
     private int tail = 0;
     private Object[] queue;
 
-    public CircleQueue(int length) {
-        this.LEN = length;
-        queue = new Object[LEN];
+    public CircleQueue(int capacity) {
+        this.capacity = capacity;
+        queue = new Object[capacity];
     }
 
     public T put(T t) {
@@ -16,8 +20,8 @@ public class CircleQueue<T> {
             return null;
         }
 
-        queue[head ++] = t;
-        head = head >= LEN ? head % LEN : head;
+        queue[tail] = t;
+        tail = (tail + 1) % capacity;
 
         return t;
     }
@@ -28,9 +32,8 @@ public class CircleQueue<T> {
             return null;
         }
 
-        Object obj = queue[tail];
-        queue[tail ++] = null;
-        tail = tail >= LEN ? tail % LEN : tail;
+        Object obj = queue[head];
+        head = (head + 1) % capacity;
 
         return obj == null ? null : (T) obj;
     }
@@ -40,10 +43,10 @@ public class CircleQueue<T> {
     }
 
     private boolean isFull() {
-        return head == tail && queue[head] != null;
+        return (tail + 1) % capacity == head;
     }
 
     private boolean isEmpty() {
-        return head == tail && queue[head] == null;
+        return head == tail;
     }
 }

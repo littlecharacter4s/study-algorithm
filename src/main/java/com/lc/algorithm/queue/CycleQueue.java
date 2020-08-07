@@ -1,15 +1,19 @@
 package com.lc.algorithm.queue;
 
+/**
+ * 尾进头出
+ * @param <T>
+ */
 public class CycleQueue<T> {
-    private final int LEN;
+    private final int capacity;
     private int size = 0;
     private int head = 0;
     private int tail = 0;
     private Object[] queue;
 
-    public CycleQueue(int length) {
-        this.LEN = length;
-        queue = new Object[LEN];
+    public CycleQueue(int capacity) {
+        this.capacity = capacity;
+        queue = new Object[capacity];
     }
 
     public T put(T t) {
@@ -17,8 +21,8 @@ public class CycleQueue<T> {
             return null;
         }
 
-        queue[head ++] = t;
-        head = head == LEN ? head % LEN : head;
+        queue[tail ++] = t;
+        tail = tail == capacity ? tail % capacity : tail;
 
         size ++;
 
@@ -31,9 +35,9 @@ public class CycleQueue<T> {
             return null;
         }
 
-        Object obj = queue[tail];
-        queue[tail ++] = null;
-        tail = tail == LEN ? tail % LEN : tail;
+        Object obj = queue[head];
+        queue[head ++] = null;
+        head = head == capacity ? head % capacity : head;
 
         size --;
 
@@ -45,7 +49,7 @@ public class CycleQueue<T> {
     }
 
     private boolean isFull() {
-        return size == LEN;
+        return size == capacity;
     }
 
     private boolean isEmpty() {
