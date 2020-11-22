@@ -20,6 +20,8 @@ import java.util.*;
  * F-T=1
  * <p>
  * f(T) = min(f(D) + DT, f(E) + ET, f(F) + FT);
+ *
+ * 注意：这个算法是不严谨的，比如有跨层连通的
  */
 public class NC0011DynamicProgramming {
     private static final int LEN = 3;
