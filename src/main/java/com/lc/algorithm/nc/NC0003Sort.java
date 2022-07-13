@@ -9,12 +9,14 @@ public class NC0003Sort {
      * @param array 待排序数组
      */
     public void bubbleSort(int[] array) {
+        // 0~n-1
+        // 0~n-2
+        // 0~n-3
+        int bubble = array.length - 1;
         boolean change;
-        int length = array.length;
         do {
             change = false;
-            length -= 1;
-            for (int i = 0; i < length; i++) {
+            for (int i = 0; i < bubble; i++) {
                 if (array[i] > array[i + 1]) {
                     int temp = array[i];
                     array[i] = array[i + 1];
@@ -22,6 +24,7 @@ public class NC0003Sort {
                     change = true;
                 }
             }
+            bubble--;
         } while (change);
     }
 
@@ -31,6 +34,9 @@ public class NC0003Sort {
      * @param array 待排序数组
      */
     public void selectionSort(int[] array) {
+        // 0~n-1
+        // 1~n-1
+        // 2~n-1
         for (int i = 0, j = array.length - 1; i < j; i++, j--) {
             int min = i;
             int max = j;
@@ -73,14 +79,13 @@ public class NC0003Sort {
      * @param array 待排序数组
      */
     public void insertionSort(int[] array) {
+        // 0~1
+        // 0~2
+        // 0~n-1
         for (int i = 1; i < array.length; i++) {
-            int key = array[i];
-            int j = i - 1;
-            while (j >= 0 && array[j] > key) {
-                array[j + 1] = array[j];
-                j--;
+            for (int j = i - 1; j >= 0 && array[j] > array[j + 1] ; j--) {
+                swap(array, j, j + 1);
             }
-            array[j + 1] = key;
         }
     }
 
@@ -194,5 +199,14 @@ public class NC0003Sort {
                 System.arraycopy(orderedArr, left, arr, left, right - left + 1);
             }
         }
+    }
+
+    private void swap(int[] array, int i, int j) {
+        if (i == j) {
+            return;
+        }
+        array[i] = array[i] ^ array[j];
+        array[j] = array[i] ^ array[j];
+        array[i] = array[i] ^ array[j];
     }
 }

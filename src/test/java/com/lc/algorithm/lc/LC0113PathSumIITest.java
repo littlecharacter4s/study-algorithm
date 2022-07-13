@@ -1,4 +1,4 @@
-package com.lc.algorithm;
+package com.lc.algorithm.lc;
 
 import com.alibaba.fastjson.JSON;
 import com.lc.algorithm.lc.LC0113PathSumII;

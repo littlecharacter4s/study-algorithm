@@ -1,4 +1,4 @@
-package com.lc.algorithm;
+package com.lc.algorithm.nc;
 
 import com.lc.algorithm.nc.NC0010RateLimiter;
 import org.junit.Test;

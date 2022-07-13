@@ -1,4 +1,4 @@
-package com.lc.algorithm;
+package com.lc.algorithm.lc;
 
 import com.lc.algorithm.lc.LC0421MaximumXORofTwoNumbersInAnArray;
 import org.junit.Test;

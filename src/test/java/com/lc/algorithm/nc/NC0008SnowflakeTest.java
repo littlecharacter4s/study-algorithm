@@ -1,4 +1,4 @@
-package com.lc.algorithm;
+package com.lc.algorithm.nc;
 
 import com.lc.algorithm.nc.NC0008Snowflake;
 import org.junit.Test;
