@@ -1,5 +1,6 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.lc.LC0559MaximumDepthOfN_aryTree;
 import org.junit.Test;
 
 import java.util.ArrayList;

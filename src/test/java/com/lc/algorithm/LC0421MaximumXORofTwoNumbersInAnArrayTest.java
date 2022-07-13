@@ -1,5 +1,6 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.lc.LC0421MaximumXORofTwoNumbersInAnArray;
 import org.junit.Test;
 
 public class LC0421MaximumXORofTwoNumbersInAnArrayTest {

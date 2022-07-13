@@ -1,5 +1,6 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.lc.LC0206ReverseLinkedList;
 import org.junit.Test;
 
 public class LC0206ReverseLinkedListTest {

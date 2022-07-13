@@ -1,5 +1,6 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.lc.LC0002AddTwoNumbers;
 import org.junit.Test;
 
 public class LC0002AddTwoNumbersTest {

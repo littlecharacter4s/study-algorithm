@@ -1,5 +1,6 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.nc.NC0007Lru;
 import org.junit.Test;
 
 import java.util.Map;

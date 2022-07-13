@@ -1,6 +1,7 @@
 package com.lc.algorithm;
 
 import com.alibaba.fastjson.JSON;
+import com.lc.algorithm.lc.LC0046FullPermutation;
 import org.junit.Test;
 
 public class LC0046FullPermutationTest {

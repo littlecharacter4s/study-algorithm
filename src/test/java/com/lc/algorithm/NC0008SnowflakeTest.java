@@ -1,5 +1,6 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.nc.NC0008Snowflake;
 import org.junit.Test;
 
 import java.time.LocalDateTime;

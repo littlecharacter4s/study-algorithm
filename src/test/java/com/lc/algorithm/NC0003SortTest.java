@@ -1,6 +1,7 @@
 package com.lc.algorithm;
 
 import com.alibaba.fastjson.JSON;
+import com.lc.algorithm.nc.NC0003Sort;
 import org.junit.Test;
 
 public class NC0003SortTest {

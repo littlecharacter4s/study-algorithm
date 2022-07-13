@@ -1,5 +1,6 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.nc.NC0006ConsistentHash;
 import org.junit.Test;
 
 public class NC0006ConsistentHashTest {

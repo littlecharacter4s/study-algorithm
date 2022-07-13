@@ -1,5 +1,6 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.nc.NC0001JudgeConnectedness;
 import org.junit.Test;
 
 import java.util.Random;

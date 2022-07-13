@@ -1,8 +1,7 @@
 package com.lc.algorithm;
 
+import com.lc.algorithm.lc.LC0703KthLargestElementInAStream;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class LC0703KthLargestElementInAStreamTest {
     @Test

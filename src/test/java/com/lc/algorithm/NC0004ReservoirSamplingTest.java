@@ -1,6 +1,8 @@
 package com.lc.algorithm;
 
 import com.alibaba.fastjson.JSON;
+import com.lc.algorithm.nc.NC0003Sort;
+import com.lc.algorithm.nc.NC0004ReservoirSampling;
 import org.junit.Test;
 
 import java.util.Random;
