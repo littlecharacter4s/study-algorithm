@@ -1,6 +1,6 @@
 package com.lc.algorithm.nc;
 
-import com.lc.algorithm.structure.stack.ArrayStack;
+import com.lc.structure.stack.ArrayStack;
 
 import java.util.ArrayList;
 import java.util.List;

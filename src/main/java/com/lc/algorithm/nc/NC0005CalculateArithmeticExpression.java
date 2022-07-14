@@ -1,6 +1,6 @@
 package com.lc.algorithm.nc;
 
-import com.lc.algorithm.structure.stack.ArrayStack;
+import com.lc.structure.stack.ArrayStack;
 
 /**
  * 计算四则运算表达式 - 栈的运用
