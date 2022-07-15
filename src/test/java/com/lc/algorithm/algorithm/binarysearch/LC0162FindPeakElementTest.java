@@ -2,12 +2,6 @@ package com.lc.algorithm.algorithm.binarysearch;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-/**
- * @author gujixian
- * @since 2022/7/14
- */
 public class LC0162FindPeakElementTest {
     @Test
     public void testFirstBadVersion() {

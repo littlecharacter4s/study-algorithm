@@ -2,10 +2,6 @@ package com.lc.algorithm.algorithm.binarysearch;
 
 import org.junit.Test;
 
-/**
- * @author gujixian
- * @since 2022/7/14
- */
 public class LC0278FirstBadVersionTest {
     @Test
     public void testFirstBadVersion() {
