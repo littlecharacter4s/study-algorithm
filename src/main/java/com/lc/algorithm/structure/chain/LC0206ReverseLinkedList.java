@@ -4,6 +4,9 @@ package com.lc.algorithm.structure.chain;
  * 题目：反转链表
  * 描述：给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
  * 分析：画图Coding
+ * 1.定义变量阶段除了当前节点，其他都是null
+ * 2.next作用是暂存curr节点的next指针
+ * 3.curr和prev才是真实的移步操作
  * 链接：https://leetcode.cn/problems/reverse-linked-list/
  * @author gujixian
  * @since 2022-07-16
