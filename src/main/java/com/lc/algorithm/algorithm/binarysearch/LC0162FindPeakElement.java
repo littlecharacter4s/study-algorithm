@@ -11,7 +11,6 @@ package com.lc.algorithm.algorithm.binarysearch;
  * 1.局部最大/小问题
  * 2.此题少个条件，任意两个相邻的数不相等
  * 链接：https://leetcode.cn/problems/find-peak-element
- * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * @author gujixian
  * @since 2022/7/14
  */
