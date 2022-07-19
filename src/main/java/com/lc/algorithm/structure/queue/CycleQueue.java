@@ -1,14 +1,10 @@
 package com.lc.algorithm.structure.queue;
 
-/**
- * 尾进头出
- * @param <T>
- */
 public class CycleQueue<T> {
     private final int capacity;
     private int size = 0;
-    private int head = 0;
-    private int tail = 0;
+    private int getIndex = 0;
+    private int putIndex = 0;
     private Object[] queue;
 
     public CycleQueue(int capacity) {
@@ -20,12 +16,9 @@ public class CycleQueue<T> {
         if (this.isFull()) {
             return null;
         }
-
-        queue[tail ++] = t;
-        tail = tail == capacity ? tail % capacity : tail;
-
+        queue[putIndex ++] = t;
+        putIndex = putIndex % capacity;
         size ++;
-
         return t;
     }
 
@@ -34,13 +27,10 @@ public class CycleQueue<T> {
         if (this.isEmpty()) {
             return null;
         }
-
-        Object obj = queue[head];
-        queue[head ++] = null;
-        head = head == capacity ? head % capacity : head;
-
+        Object obj = queue[getIndex];
+        queue[getIndex ++] = null;
+        getIndex = getIndex % capacity;
         size --;
-
         return obj == null ? null : (T) obj;
     }
 
