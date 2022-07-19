@@ -1,65 +1,39 @@
 package com.lc.algorithm.structure.stack;
 
-public class LinkedStack {
-    private int size = 0;
-    private Node head;
-    private Node max = head;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-    public void push(int element) {
-        Node node = new Node(element);
-        if (head == null) {
-            head = node;
-        } else {
-            node.next = head;
-            head = node;
-        }
-        this.afterPush(node);
-        size++;
+public class LinkedStack<E> {
+    private LinkedList<E> list;
+
+    public LinkedStack() {
+        list = new LinkedList<>();
     }
 
-    private void afterPush(Node node) {
-        if (max == null || max.element < node.element) {
-            max = node;
-        }
-    }
-
-    public Integer pop() {
-        if (head == null) {
+    public E pop() {
+        if (this.isEmpty()) {
             return null;
         }
-        int element = head.element;
-        this.afterPop(head);
-        head = head.next;
-        size--;
-        return element;
+        return list.removeLast();
     }
 
-    private void afterPop(Node node) {
-        if (max != node) {
-            return;
-        }
-        Node current = max = max.next;
-        while (current != null) {
-            if (max.element < current.element) {
-                max = current;
-            }
-            current = current.next;
-        }
+    public void push(E element) {
+        list.add(element);
     }
 
-    public Integer max() {
-        if (max == null) {
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public E peek() {
+        if (this.isEmpty()) {
             return null;
         }
-        return max.element;
+        return list.getLast();
     }
 
-    private static class Node {
-        int element;
-        Node next;
-
-        Node(Integer element) {
-            this.element = element;
-        }
+    public List<E> get() {
+        return new LinkedList<>(list);
     }
 }

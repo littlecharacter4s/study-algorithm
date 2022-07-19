@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayStack<E> {
-    private List<E> list;
+    private ArrayList<E> list;
 
     public ArrayStack() {
         list = new ArrayList<>();
@@ -33,8 +33,6 @@ public class ArrayStack<E> {
     }
 
     public List<E> get() {
-        List<E> snapshot = new ArrayList<>(list.size());
-        snapshot.addAll(list);
-        return snapshot;
+        return new ArrayList<>(list);
     }
 }
