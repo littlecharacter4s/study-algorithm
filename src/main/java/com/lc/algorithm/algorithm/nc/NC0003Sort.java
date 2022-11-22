@@ -2,6 +2,8 @@ package com.lc.algorithm.algorithm.nc;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.Random;
+
 public class NC0003Sort {
     /**
      * 冒泡排序（优化版）
@@ -91,11 +93,11 @@ public class NC0003Sort {
 
 
     /**
-     * 快速排序（划分交换排序）
+     * 快速排序（划分交换排序）：从荷兰国旗问题到快速排序
      * 快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。
      * 步骤为：
      * 1.从数列中挑出一个元素，称为“基准”（pivot）;
-     * 2.重新排序数列，所有比基准值小的元素摆放在基准前面，所有比基准值大的元素摆在基准后面（相同的数可以到任何一边）。在这个分区结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。
+     * 2.重新排序数列，所有比基准值小的元素摆放在基准前面，所有比基准值大的元素摆在基准后面，相同的数放在中间。在这个分区结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。
      * 3.递归地（recursively）把小于基准值元素的子数列和大于基准值元素的子数列排序。
      * 注：递归到最底部时，数列的大小是零或一，也就是已经排序好了。这个算法一定会结束，因为在每次的迭代（iteration）中，它至少会把一个元素摆到它最后的位置去。
      *
@@ -103,31 +105,39 @@ public class NC0003Sort {
      * @param head
      * @param tail
      */
-    public void quickSort(int[] array, int head, int tail) {
-        if (head >= tail || array == null || array.length <= 1) {
+    private static final Random RANDOM = new Random();
+    public int[] sortArray(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return nums;
+        }
+        this.quiklySort(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    private void quiklySort(int[] nums, int left, int right) {
+        if (left >= right) {
             return;
         }
-        int i = head, j = tail, pivot = array[(head + tail) / 2];
-        while (i <= j) {
-            while (array[i] < pivot) {
-                ++i;
+        int[] equal = this.partition(nums, left, right);
+        this.quiklySort(nums, left, equal[0]);
+        this.quiklySort(nums, equal[1], right);
+    }
+
+    private int[] partition(int[] nums, int left, int right) {
+        int pivot = nums[left + RANDOM.nextInt(right - left + 1)];
+        int i = left;
+        int l = i - 1;
+        int r = right + 1;
+        while (i < r) {
+            if (nums[i] < pivot) {
+                this.swap(nums, ++l, i++);
+            } else if (nums[i] > pivot) {
+                this.swap(nums, i, --r);
+            } else {
+                i++;
             }
-            while (array[j] > pivot) {
-                --j;
-            }
-            if (i < j) {
-                int t = array[i];
-                array[i] = array[j];
-                array[j] = t;
-                ++i;
-                --j;
-            } else if (i == j) {
-                ++i;
-            }
-            // 剩下一种情况就是i > j，结束循环
         }
-        quickSort(array, head, j);
-        quickSort(array, i, tail);
+        return new int[]{l,i};
     }
 
     /**
