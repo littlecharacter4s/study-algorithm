@@ -171,15 +171,20 @@ public class NC0003Sort {
      * 堆排序
      ******************************************************************************************************************/
     public void heapSort(int[] nums) {
+        this.heapify(nums); // O(N)
         int size = nums.length;
-        for (int i = nums.length - 1; i >= 0; i--) {
-            this.siftDownV2(nums, size, i, nums[i]);
-        }
-        for (int i = nums.length - 1; i > 0; i--) {
+        // O(N*logN)
+        for (int i = nums.length - 1; i > 0; i--) { // O(N)
             int x = nums[i];
             nums[i] = nums[0];
             size --;
-            this.siftDownV2(nums, size, 0, x);
+            this.siftDownV2(nums, size, 0, x); // O(logN)
+        }
+    }
+
+    private void heapify(int[] nums) {
+        for (int i = nums.length - 1; i >= 0; i--) {
+            this.siftDownV2(nums, nums.length, i, nums[i]);
         }
     }
 
