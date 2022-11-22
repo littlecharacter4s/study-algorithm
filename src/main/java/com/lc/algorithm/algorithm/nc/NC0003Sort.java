@@ -22,7 +22,7 @@ public class NC0003Sort {
         this.quickSort(Arrays.copyOf(nums, nums.length), 0, nums.length - 1);
         // 归并排序
         this.mergeSort(Arrays.copyOf(nums, nums.length), 0, nums.length - 1);
-        // 冒泡排序
+        // 堆排序
         // 打印结果
         for (int num : nums) {
             System.out.print(num + " ");
@@ -144,7 +144,6 @@ public class NC0003Sort {
         this.mergeSort(nums, left, mid);
         this.mergeSort(nums, mid + 1, right);
         this.merge(nums, left, mid, right);
-
     }
 
     private void merge(int[] nums, int left, int mid, int right) {

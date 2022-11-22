@@ -11,8 +11,8 @@ import java.util.Arrays;
  * 2.完全二叉树只有数组下标小于或等于[(数组长度 / 2) - 1]的元素有子节点
  * 3.父节点下标[i]和子节点下标[jl,jr]的关系{
  *     i = (j - 1) >>> 1;
- *     jl = ((i + 1) << 1) - 1;
- *     jr = (i + 1) << 1;
+ *     jl = (i << 1) + 1;
+ *     jr = (i << 1) + 2;
  * }
  * 注：这里以Integer类型的最小堆为例，只实现offer，peek，poll方法
  */
@@ -48,11 +48,10 @@ public class MinHeap {
         if (size == 0) {
             return null;
         }
-        int result = elements[0];
         int i = --size;
+        int result = elements[0];
         int x = elements[i];
-        elements = Arrays.copyOf(elements, i);
-        //System.out.println(JSON.toJSONString(elements));
+        elements[i] = 0; // 如果不是基本类型的数组，需要置为 null
         if (i != 0) {
             this.siftDown(0, x);
         }
@@ -95,18 +94,13 @@ public class MinHeap {
         }
     }
 
-    private void swap(int i, int j) {
-        int tmp = elements[i];
-        elements[i] = elements[j];
-        elements[j] = tmp;
-    }
-
     /**
      * 由下而上调整节点
      * @param i
      * @param x
      */
     private void siftUp(int i, int x) {
+        // 由下而上找 x 应该插入的位置 i
         while (i > 0) {
             int parent = (i - 1) >>> 1;
             int e = elements[parent];
@@ -124,8 +118,8 @@ public class MinHeap {
         // 第一个无子节点的节点
         int half = size >>> 1;
         while (i < half) {
-            int left = ((i + 1) << 1) - 1;
-            int right = (i + 1) << 1;
+            int left = (i << 1) + 1;
+            int right = (i << 1) + 2;
             // 最后一个有子节点的节点可能没有右节点，这里处理一下防止越界
             right = right < size ? right : left;
             int min = elements[left] > elements[right] ? right : left;
@@ -136,5 +130,14 @@ public class MinHeap {
             i = min;
         }
         elements[i] = x;
+    }
+
+    private void swap(int i, int j) {
+        if (i == j) {
+            return;
+        }
+        elements[i] = elements[i] ^ elements[j];
+        elements[j] = elements[i] ^ elements[j];
+        elements[i] = elements[i] ^ elements[j];
     }
 }
