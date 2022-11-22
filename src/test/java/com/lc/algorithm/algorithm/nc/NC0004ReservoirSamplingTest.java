@@ -19,7 +19,7 @@ public class NC0004ReservoirSamplingTest {
         System.out.println(JSON.toJSONString(pool));
         System.out.println("样本：");
         int[] sample = new NC0004ReservoirSampling().sampling(pool, K);
-        new NC0003Sort().mergeSortIteration(sample);
+        new NC0003Sort().mergeSort(sample, 0, sample.length - 1);
         System.out.println(JSON.toJSONString(sample));
     }
 }
