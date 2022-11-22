@@ -30,5 +30,9 @@ public class NC0003SortTest {
         int[] result = new int[n.length];
         new NC0003Sort().mergeSort(n, 0, n.length - 1);
         System.out.println(JSON.toJSONString(n));
+        System.out.println("堆排序");
+        n = new int[]{5,3,9,4,6,7,0,2,8,8,8,8};
+        new NC0003Sort().heapSort(n);
+        System.out.println(JSON.toJSONString(n));
     }
 }

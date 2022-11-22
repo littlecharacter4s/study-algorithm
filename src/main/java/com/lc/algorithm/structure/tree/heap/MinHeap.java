@@ -82,8 +82,8 @@ public class MinHeap {
      */
     private void heapify(int i) {
         // 获取左右结点的数组下标
-        int left = ((i + 1) << 1) - 1;
-        int right = (i + 1) << 1;
+        int left = (i << 1) + 1;
+        int right = left + 1;
 
         int min = elements[left] > elements[right] ? right : left;
 
@@ -128,6 +128,25 @@ public class MinHeap {
             }
             elements[i] = elements[min];
             i = min;
+        }
+        elements[i] = x;
+    }
+
+    // 自上而下调整节点
+    private void siftDownV2(int i, int x) {
+        // 第一个无子节点的节点
+        int left = (i << 1) + 1;
+        while (left < size) {
+            int right = left + 1;
+            // 最后一个有子节点的节点可能没有右节点，这里处理一下防止越界
+            right = right < size ? right : left;
+            int min = elements[left] > elements[right] ? right : left;
+            if (x <= elements[min]) {
+                break;
+            }
+            elements[i] = elements[min];
+            i = min;
+            left = (i << 1) + 1;
         }
         elements[i] = x;
     }

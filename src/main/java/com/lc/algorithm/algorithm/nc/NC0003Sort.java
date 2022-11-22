@@ -23,6 +23,7 @@ public class NC0003Sort {
         // 归并排序
         this.mergeSort(Arrays.copyOf(nums, nums.length), 0, nums.length - 1);
         // 堆排序
+        this.heapSort(Arrays.copyOf(nums, nums.length));
         // 打印结果
         for (int num : nums) {
             System.out.print(num + " ");
@@ -164,6 +165,62 @@ public class NC0003Sort {
             nums[left++] = n;
         }
     }
+
+
+    /*******************************************************************************************************************
+     * 堆排序
+     ******************************************************************************************************************/
+    public void heapSort(int[] nums) {
+        int size = nums.length;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            this.siftDownV2(nums, size, i, nums[i]);
+        }
+        for (int i = nums.length - 1; i > 0; i--) {
+            int x = nums[i];
+            nums[i] = nums[0];
+            size --;
+            this.siftDownV2(nums, size, 0, x);
+        }
+    }
+
+    // 自上而下调整节点 - 小顶堆 - 降序排序
+    private void siftDown(int[] nums, int size, int i, int x) {
+        // 第一个无子节点的节点
+        int left = (i << 1) + 1;
+        while (left < size) {
+            int right = left + 1;
+            // 最后一个有子节点的节点可能没有右节点，这里处理一下防止越界
+            right = right < size ? right : left;
+            int min = nums[left] > nums[right] ? right : left;
+            if (x <= nums[min]) {
+                break;
+            }
+            nums[i] = nums[min];
+            i = min;
+            left = (i << 1) + 1;
+        }
+        nums[i] = x;
+    }
+
+    // 自上而下调整节点 - 大顶堆 - 升序排序
+    private void siftDownV2(int[] nums, int size, int i, int x) {
+        // 第一个无子节点的节点
+        int left = (i << 1) + 1;
+        while (left < size) {
+            int right = left + 1;
+            // 最后一个有子节点的节点可能没有右节点，这里处理一下防止越界
+            right = right < size ? right : left;
+            int max = nums[left] < nums[right] ? right : left;
+            if (x >= nums[max]) {
+                break;
+            }
+            nums[i] = nums[max];
+            i = max;
+            left = (i << 1) + 1;
+        }
+        nums[i] = x;
+    }
+
 
     /*******************************************************************************************************************
      * 交换
