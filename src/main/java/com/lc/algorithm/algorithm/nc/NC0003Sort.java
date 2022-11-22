@@ -14,24 +14,22 @@ public class NC0003Sort {
         // 0~n-1
         // 0~n-2
         // 0~n-3
-        int bubble = array.length - 1;
-        boolean change;
-        do {
+        int bottom = array.length - 1;
+        boolean change = true;
+        while (change) {
             change = false;
-            for (int i = 0; i < bubble; i++) {
+            for (int i = 0; i < bottom; i++) {
                 if (array[i] > array[i + 1]) {
-                    int temp = array[i];
-                    array[i] = array[i + 1];
-                    array[i + 1] = temp;
+                    this.swap(array, i, i + 1);
                     change = true;
                 }
             }
-            bubble--;
-        } while (change);
+            bottom--;
+        }
     }
 
     /**
-     * 选择排序（优化版）
+     * 选择排序（优化版）（少用）
      *
      * @param array 待排序数组
      */
@@ -51,25 +49,13 @@ public class NC0003Sort {
                 }
             }
             if (min == j && max == i) {
-                int temp = array[min];
-                array[min] = array[max];
-                array[max] = temp;
+                this.swap(array, min, max);
             } else if (min == j) {
-                int minTemp = array[i];
-                array[i] = array[min];
-                array[min] = minTemp;
-
-                int maxTemp = array[j];
-                array[j] = array[max];
-                array[max] = maxTemp;
+                this.swap(array, min, i);
+                this.swap(array, j, max);
             } else {
-                int maxTemp = array[j];
-                array[j] = array[max];
-                array[max] = maxTemp;
-
-                int minTemp = array[i];
-                array[i] = array[min];
-                array[min] = minTemp;
+                this.swap(array, j, max);
+                this.swap(array, min, i);
             }
         }
     }
@@ -85,7 +71,7 @@ public class NC0003Sort {
         // 0~2
         // 0~n-1
         for (int i = 1; i < array.length; i++) {
-            for (int j = i - 1; j >= 0 && array[j] > array[j + 1] ; j--) {
+            for (int j = i; j > 0 && array[j - 1] > array[j] ; j--) {
                 swap(array, j, j + 1);
             }
         }
