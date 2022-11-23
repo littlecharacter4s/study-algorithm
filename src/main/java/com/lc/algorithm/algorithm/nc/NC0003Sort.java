@@ -2,34 +2,62 @@ package com.lc.algorithm.algorithm.nc;
 
 import com.alibaba.fastjson.JSON;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class NC0003Sort {
     private static final Random RANDOM = new Random();
+
+    public static void main(String[] args) {
+        System.out.println("排序结果：" + JSON.toJSONString(new NC0003Sort().sortArray(new int[]{7,1,2,3,5,5,0,7,9,1,8,9,4,0,3,2,6,4,8,6})));
+    }
     
     public int[] sortArray(int[] nums) {
         if (nums == null || nums.length < 2) {
             return nums;
         }
+        System.out.println("原始数组：" + JSON.toJSONString(nums));
+        
+        int[] nums4Sort;
+        
         // 冒泡排序
-        this.bubbleSort(Arrays.copyOf(nums, nums.length));
+        nums4Sort = Arrays.copyOf(nums, nums.length);
+        this.bubbleSort(nums4Sort);
+        System.out.println("冒泡排序：" + JSON.toJSONString(nums4Sort));
+        
         // 选择排序
-        this.selectionSort(Arrays.copyOf(nums, nums.length));
+        nums4Sort = Arrays.copyOf(nums, nums.length);
+        this.selectionSort(nums4Sort);
+        System.out.println("选择排序：" + JSON.toJSONString(nums4Sort));
+        
         // 插入排序
-        this.insertionSort(Arrays.copyOf(nums, nums.length));
+        nums4Sort = Arrays.copyOf(nums, nums.length);
+        this.insertionSort(nums4Sort);
+        System.out.println("插入排序：" + JSON.toJSONString(nums4Sort));
+        
         // 快速排序
-        this.quickSort(Arrays.copyOf(nums, nums.length), 0, nums.length - 1);
+        nums4Sort = Arrays.copyOf(nums, nums.length);
+        this.quickSort(nums4Sort, 0, nums.length - 1);
+        System.out.println("快速排序：" + JSON.toJSONString(nums4Sort));
+        
         // 归并排序
-        this.mergeSort(Arrays.copyOf(nums, nums.length), 0, nums.length - 1);
+        nums4Sort = Arrays.copyOf(nums, nums.length);
+        this.mergeSort(nums4Sort, 0, nums.length - 1);
+        System.out.println("归并排序：" + JSON.toJSONString(nums4Sort));
+        
         // 堆排序
-        this.heapSort(Arrays.copyOf(nums, nums.length));
-        // 打印结果
-        for (int num : nums) {
-            System.out.print(num + " ");
-        }
-        return nums;
+        nums4Sort = Arrays.copyOf(nums, nums.length);
+        this.heapSort(nums4Sort);
+        System.out.println("堆排序V1：" + JSON.toJSONString(nums4Sort));
+        
+        // 堆排序
+        nums4Sort = Arrays.copyOf(nums, nums.length);
+        this.heapSortByJava(nums4Sort);
+        System.out.println("堆排序V2：" + JSON.toJSONString(nums4Sort));
+        
+        // 返回结果
+        return nums4Sort;
     }
+
 
     /*******************************************************************************************************************
      * 冒泡排序（优化版）
@@ -224,6 +252,28 @@ public class NC0003Sort {
             left = (i << 1) + 1;
         }
         nums[i] = x;
+    }
+
+
+    /*******************************************************************************************************************
+     * 堆排序
+     ******************************************************************************************************************/
+    public void heapSortByJava(int[] nums) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>((i1, i2) -> {
+            // 因为 PriorityQueue 是小顶堆，
+            // 所以，使用 i1 - i2 判断表示升序，使用 i2 - i1 表示降序
+            // 结论，不必纠结，跑一下就知道了
+            i1 = Optional.ofNullable(i1).orElse(0);
+            i2 = Optional.ofNullable(i2).orElse(0);
+            return i2 - i1;
+        });
+        for (int num : nums) {
+            heap.offer(num);
+        }
+        int index = 0;
+        while (!heap.isEmpty()) {
+            nums[index++] = heap.poll();
+        }
     }
 
 
