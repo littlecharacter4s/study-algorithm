@@ -1,32 +1,29 @@
 package com.lc.algorithm.algorithm.lc;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class LC0102BinaryTreeLevelOrderTraversal {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
-        if(root == null){
+        if (root == null) {
             return result;
         }
-        Queue<TreeNode> queue = new ArrayDeque<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()){
-            int levelNodeNum = queue.size();
-            List<Integer> subList = new ArrayList<>();
-            for (int i = 0; i < levelNodeNum; i++) {
-                TreeNode node = queue.poll();
-                subList.add(node.val);
-                if(node.left != null){
+        while (!queue.isEmpty()) {
+            int levelLength = queue.size();
+            List<Integer> subResult = new ArrayList<>(levelLength);
+            for (int i = 0; i < levelLength; i++) {
+                TreeNode node = queue.pop();
+                subResult.add(node.val);
+                if (node.left != null) {
                     queue.offer(node.left);
                 }
-                if(node.right != null){
+                if (node.right != null) {
                     queue.offer(node.right);
                 }
             }
-            result.add(subList);
+            result.add(subResult);
         }
         return result;
     }

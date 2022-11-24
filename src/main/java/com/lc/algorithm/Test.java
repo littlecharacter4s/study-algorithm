@@ -4,6 +4,7 @@ import com.lc.algorithm.algorithm.lc.LC0102BinaryTreeLevelOrderTraversal;
 import com.lc.algorithm.structure.tree.TreeNode;
 
 import java.util.Random;
+import java.util.Stack;
 
 public class Test {
     public static void main(String[] args) {
@@ -24,10 +25,25 @@ public class Test {
         if (node == null) {
             return;
         }
-        // 递归序：第 1 次经过当前节点 -> 在这打印就是先序遍历
-        print(node.left);
-        // 递归序：第 2 次经过当前节点 -> 在这打印就是中序遍历
-        print(node.right);
-        // 递归序：第 3 次经过当前节点 -> 在这打印就是后序遍历
+
+        Stack<TreeNode<Integer>> stack = new Stack<>();
+        this.pushLeft(stack, node);
+
+        while (!stack.isEmpty()) {
+            TreeNode<Integer> popNode = stack.pop();
+            System.out.println(popNode.value);
+            if (popNode.right != null) {
+                this.pushLeft(stack, popNode.right);
+            }
+        }
     }
+
+    private void pushLeft(Stack<TreeNode<Integer>> stack, TreeNode<Integer> node) {
+        while (node != null) {
+            stack.push(node);
+            node = node.left;
+        }
+    }
+
+
 }

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author gujixian
  * @since 2022/11/24
@@ -18,6 +20,7 @@ public class TreeNode<E> {
     public TreeNode<E> left;
     public TreeNode<E> right;
     public TreeNode<E> parent;
+    public List<TreeNode<E>> children;
     public boolean color;
     public int height;
 
