@@ -8,13 +8,13 @@ public class LC0102BinaryTreeLevelOrderTraversal {
         if (root == null) {
             return result;
         }
-        LinkedList<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
             int levelLength = queue.size();
             List<Integer> subResult = new ArrayList<>(levelLength);
             for (int i = 0; i < levelLength; i++) {
-                TreeNode node = queue.pop();
+                TreeNode node = queue.poll();
                 subResult.add(node.val);
                 if (node.left != null) {
                     queue.offer(node.left);
