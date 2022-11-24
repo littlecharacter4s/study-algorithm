@@ -8,52 +8,57 @@ public class NC0003Sort {
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
-        System.out.println("排序结果：" + JSON.toJSONString(new NC0003Sort().sortArray(new int[]{7,1,2,3,5,5,0,7,9,1,8,9,4,0,3,2,6,4,8,6})));
+        System.out.println("排序结果：" + JSON.toJSONString(new NC0003Sort().sortArray(new int[]{14,20,11,52,62,104,215})));
     }
-    
+
     public int[] sortArray(int[] nums) {
         if (nums == null || nums.length < 2) {
             return nums;
         }
         System.out.println("原始数组：" + JSON.toJSONString(nums));
-        
+
         int[] nums4Sort;
-        
+
         // 冒泡排序
         nums4Sort = Arrays.copyOf(nums, nums.length);
         this.bubbleSort(nums4Sort);
         System.out.println("冒泡排序：" + JSON.toJSONString(nums4Sort));
-        
+
         // 选择排序
         nums4Sort = Arrays.copyOf(nums, nums.length);
         this.selectionSort(nums4Sort);
         System.out.println("选择排序：" + JSON.toJSONString(nums4Sort));
-        
+
         // 插入排序
         nums4Sort = Arrays.copyOf(nums, nums.length);
         this.insertionSort(nums4Sort);
         System.out.println("插入排序：" + JSON.toJSONString(nums4Sort));
-        
+
         // 快速排序
         nums4Sort = Arrays.copyOf(nums, nums.length);
         this.quickSort(nums4Sort, 0, nums.length - 1);
         System.out.println("快速排序：" + JSON.toJSONString(nums4Sort));
-        
+
         // 归并排序
         nums4Sort = Arrays.copyOf(nums, nums.length);
         this.mergeSort(nums4Sort, 0, nums.length - 1);
         System.out.println("归并排序：" + JSON.toJSONString(nums4Sort));
-        
+
         // 堆排序
         nums4Sort = Arrays.copyOf(nums, nums.length);
         this.heapSort(nums4Sort);
         System.out.println("堆排序V1：" + JSON.toJSONString(nums4Sort));
-        
+
         // 堆排序
         nums4Sort = Arrays.copyOf(nums, nums.length);
         this.heapSortByJava(nums4Sort);
         System.out.println("堆排序V2：" + JSON.toJSONString(nums4Sort));
-        
+
+        // 基数排序
+        nums4Sort = Arrays.copyOf(nums, nums.length);
+        this.radixSort(nums4Sort);
+        System.out.println("基数排序：" + JSON.toJSONString(nums4Sort));
+
         // 返回结果
         return nums4Sort;
     }
@@ -274,6 +279,64 @@ public class NC0003Sort {
         while (!heap.isEmpty()) {
             nums[index++] = heap.poll();
         }
+    }
+
+
+    /*******************************************************************************************************************
+     * 基数排序：
+     * 1、按十进制位把数分组
+     * 2、掌握前缀和的技巧很重要 array[i] += array[i - 1]
+     ******************************************************************************************************************/
+    public void radixSort(int[] nums) {
+        // 获取最大数的位数
+        int digit = this.getDigit(nums);
+        // 辅助数组 - 队列
+        int[] help = new int[nums.length];
+        // 每个十进制位的数 ∈ [0,9]
+        int[] count = new int[10];
+        // 最大数有几位就要重复几遍
+        for (int i = 0; i < digit; i++) {
+            // 取出每个数的个、十、百、千...位计入计数数组 count
+            for (int num : nums) {
+                int x = this.getDigitNum(num, i);
+                count[x]++;
+            }
+            // 计算 count 的前缀和，即，小于等于 当前数 的数 总共出现了多少次，以此来确认 nums 中的数出现在 help 中的位置
+            for (int j = 1; j < count.length; j++) {
+                count[j] += count[j - 1];
+            }
+            // 将 nums 中的数放入 help 中按照当前十进制位排序
+            // 这里将 nums 从右开始放入 help，表示十进制位相同的数是先进先出的队列
+            for (int k = nums.length - 1; k >= 0; k--) {
+                int x = this.getDigitNum(nums[k], i);
+                help[--count[x]] = nums[k];
+            }
+            // 将 help 中数的顺序拷贝到 nums
+            for (int h = 0; h < help.length; h++) {
+                nums[h] = help[h];
+            }
+            // 重置计数数组
+            Arrays.fill(count, 0);
+        }
+    }
+
+    private int getDigitNum(int num, int i) {
+        // 先对指定位取整，再对 10 取余，就可以把指定位的数取出来
+        return (num / (int) Math.pow(10, i)) % 10;
+    }
+
+    private int getDigit(int[] nums) {
+        int max = nums[0];
+        for (int num : nums) {
+            max = Math.max(num, max);
+        }
+        int digit = 1;
+        int quotient = max / 10;
+        while (quotient > 0) {
+            digit++;
+            quotient = quotient / 10;
+        }
+        return digit;
     }
 
 

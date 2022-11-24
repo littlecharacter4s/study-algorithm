@@ -7,16 +7,13 @@ package com.lc.algorithm.structure.chain;
  * 1.快慢指针找到中点或下中点，此过程中前半部分链表逆序
  * 2.处理中间边界
  * 3.判断是否回文，并还原链表
- * 链接：
+ * 链接：https://leetcode.cn/problems/palindrome-linked-list/
  * @author gujixian
  * @since 2022/7/17
  */
 public class LC0234PalindromeLinkedList {
     public boolean isPalindrome(ListNode head) {
-        if (head == null) {
-            return false;
-        }
-        if (head.next == null) {
+        if (head == null || head.next == null) {
             return true;
         }
         ListNode prev = null;
