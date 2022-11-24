@@ -26,7 +26,7 @@ public class RBTree<E extends Comparable<? super E>> {
 
     //带比较器的构造函数
     public RBTree(Cmp<? super E> cmp){
-        if(cmp == null){
+        if (cmp == null) {
             throw new IllegalArgumentException();
         }
         this.cmp = cmp;
