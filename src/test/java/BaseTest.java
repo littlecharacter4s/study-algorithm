@@ -1,3 +1,4 @@
+import com.lc.structure.tree.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,14 +12,29 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class BaseTest {
     @Test
     public void test() {
-        Assert.assertTrue("这只是一个测试", LocalDate.now().getYear() < Integer.MAX_VALUE);
+        TreeNode<Integer> root = new TreeNode<>(10);
+        TreeNode<Integer> left = new TreeNode<>(5);
+        TreeNode<Integer> right = new TreeNode<>(15);
+        root.left = left;
+        root.right = right;
+        left.left = new TreeNode<>(4);
+        left.right = new TreeNode<>(6);
+        right.left = new TreeNode<>(11);
+        right.right = new TreeNode<>(16);
+
+        System.out.println(this.isBST(root));
     }
 
-    @Test
-    public void testBase() {
-        LinkedList linkedList = new LinkedList();
-        Stack stack = new Stack();
-        ArrayBlockingQueue queue = new ArrayBlockingQueue(12);
-        LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue();
+    int preValue = Integer.MIN_VALUE;
+    public boolean isBST(TreeNode<Integer> node) {
+        if (node == null) {
+            return true;
+        }
+        if (this.isBST(node.left) && preValue < node.value) {
+            preValue = node.value;
+        } else {
+            return false;
+        }
+        return this.isBST(node.right);
     }
 }
