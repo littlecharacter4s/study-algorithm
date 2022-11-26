@@ -1,3 +1,5 @@
+import com.alibaba.fastjson.JSON;
+import com.lc.structure.graph.Graph;
 import com.lc.structure.tree.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,29 +14,17 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class BaseTest {
     @Test
     public void test() {
-        TreeNode<Integer> root = new TreeNode<>(10);
-        TreeNode<Integer> left = new TreeNode<>(5);
-        TreeNode<Integer> right = new TreeNode<>(15);
-        root.left = left;
-        root.right = right;
-        left.left = new TreeNode<>(4);
-        left.right = new TreeNode<>(6);
-        right.left = new TreeNode<>(11);
-        right.right = new TreeNode<>(16);
-
-        System.out.println(this.isBST(root));
-    }
-
-    int preValue = Integer.MIN_VALUE;
-    public boolean isBST(TreeNode<Integer> node) {
-        if (node == null) {
-            return true;
-        }
-        if (this.isBST(node.left) && preValue < node.value) {
-            preValue = node.value;
-        } else {
-            return false;
-        }
-        return this.isBST(node.right);
+        Integer[][] matrix = new Integer[3][3];
+        matrix[0][0] = 0;
+        matrix[0][1] = 1;
+        matrix[0][2] = 3;
+        matrix[1][0] = 0;
+        matrix[1][1] = 2;
+        matrix[1][2] = 3;
+        matrix[2][0] = 1;
+        matrix[2][1] = 2;
+        matrix[2][2] = 5;
+        Graph<Integer> graph = Graph.buildGraph(matrix);
+        System.out.println(JSON.toJSONString(graph.nodeMap.get(1)));
     }
 }
