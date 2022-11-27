@@ -1,15 +1,16 @@
-package com.lc.structure.tree;
+package com.lc.structure.tree.avl;
 
 import com.alibaba.fastjson.JSON;
+import com.lc.structure.tree.TreeNode;
 
 import java.util.Optional;
 
 public class AvlTree<E extends Comparable<E>> {
-    private AvlNode<E> root = null;
+    private TreeNode<E> root = null;
 
     public AvlTree() {}
 
-    public AvlTree(AvlNode<E> root) {
+    public AvlTree(TreeNode<E> root) {
         this.root = root;
     }
 
@@ -25,15 +26,15 @@ public class AvlTree<E extends Comparable<E>> {
         return this.height(root);
     }
 
-    private AvlNode<E> insert(E element, AvlNode<E> root) {
+    private TreeNode<E> insert(E element, TreeNode<E> root) {
         //插入的位置
-        root = Optional.ofNullable(root).orElse(new AvlNode<>(element));
-        if (element.compareTo(root.getElement()) < 0) {
+        root = Optional.ofNullable(root).orElse(new TreeNode<>(element));
+        if (element.compareTo(root.getValue()) < 0) {
             //插入到左子树
             root.setLeft(this.insert(element, root.getLeft()));
             //插入之后判断是否打破了平衡
             if (Math.abs(this.height(root.getLeft()) - this.height(root.getRight())) == 2) {
-                if (element.compareTo(root.getLeft().getElement()) < 0) {
+                if (element.compareTo(root.getLeft().getValue()) < 0) {
                     /**
                      * LL型
                      *****************************************
@@ -57,12 +58,12 @@ public class AvlTree<E extends Comparable<E>> {
                     root = this.leftAndRightRotate(root);
                 }
             }
-        } else if (element.compareTo(root.getElement()) > 0) {
+        } else if (element.compareTo(root.getValue()) > 0) {
             //插入到右子树
             root.setRight(insert(element, root.getRight()));
             //插入之后判断是否打破了平衡
             if (Math.abs(this.height(root.getRight()) - this.height(root.getLeft())) == 2) {
-                if (element.compareTo(root.getRight().getElement()) > 0) {
+                if (element.compareTo(root.getRight().getValue()) > 0) {
                     /**
                      * RR型
                      *****************************************
@@ -94,18 +95,18 @@ public class AvlTree<E extends Comparable<E>> {
         return root;
     }
 
-    private AvlNode<E> remove(E element, AvlNode<E> root) {
+    private TreeNode<E> remove(E element, TreeNode<E> root) {
         //找不到要删除的节点
         if (root == null) {
             return null;
         }
-        if (element.compareTo(root.getElement()) < 0) {
+        if (element.compareTo(root.getValue()) < 0) {
             //要删除的节点在左子树中
             root.setLeft(this.remove(element, root.getLeft()));
             //删除之后判断是否打破了平衡
             if (Math.abs(this.height(root.getRight()) - this.height(root.getLeft())) == 2) {
                 //因为删除的是左子树的节点，所以失衡情况只能是RX型
-                AvlNode<E> rightNode = root.getRight();
+                TreeNode<E> rightNode = root.getRight();
                 //根据右子树的左右深度判断失衡类型
                 if (this.height(rightNode.getLeft()) > this.height(rightNode.getRight())) {
                     /**
@@ -131,13 +132,13 @@ public class AvlTree<E extends Comparable<E>> {
                     root = this.leftRotate(root);
                 }
             }
-        } else if (element.compareTo(root.getElement()) > 0) {
+        } else if (element.compareTo(root.getValue()) > 0) {
             //要删除的节点在右子树中
             root.setRight(this.remove(element, root.getRight()));
             //删除之后判断是否打破了平衡
             if (Math.abs(this.height(root.getLeft()) - this.height(root.getRight())) == 2) {
                 //因为删除的是右子树的节点，所以失衡情况只能是LX型
-                AvlNode<E> leftNode = root.getLeft();
+                TreeNode<E> leftNode = root.getLeft();
                 //根据左子树的左右深度判断失衡类型
                 if (this.height(leftNode.getRight()) > this.height(leftNode.getLeft())) {
                     /**
@@ -166,13 +167,13 @@ public class AvlTree<E extends Comparable<E>> {
         } else if (root.getLeft() != null && root.getRight() != null) {
             //要删除的节点有两个子树，找子树中最大或最小的节点删除，是为了能最小限度地影响树的平衡
             if (this.height(root.getLeft()) > this.height(root.getRight())) {
-                AvlNode<E> maxNode = this.maximum(root.getLeft());
-                root.setElement(maxNode.getElement());
-                root.setLeft(this.remove(maxNode.getElement(), root.getLeft()));
+                TreeNode<E> maxNode = this.maximum(root.getLeft());
+                root.setValue(maxNode.getValue());
+                root.setLeft(this.remove(maxNode.getValue(), root.getLeft()));
             } else {
-                AvlNode<E> minNode = this.minimum(root.getRight());
-                root.setElement(minNode.getElement());
-                root.setRight(this.remove(minNode.getElement(), root.getRight()));
+                TreeNode<E> minNode = this.minimum(root.getRight());
+                root.setValue(minNode.getValue());
+                root.setRight(this.remove(minNode.getValue(), root.getRight()));
             }
         } else {
             //要删除的节点小于两个子树
@@ -188,8 +189,8 @@ public class AvlTree<E extends Comparable<E>> {
     }
 
     //LL
-    private AvlNode<E> rightRotate(AvlNode<E> root) {
-        AvlNode<E> newRoot = root.getLeft();
+    private TreeNode<E> rightRotate(TreeNode<E> root) {
+        TreeNode<E> newRoot = root.getLeft();
         root.setLeft(newRoot.getRight());
         newRoot.setRight(root);
         root.setHeight(Math.max(this.height(root.getLeft()), this.height(root.getRight())) + 1);
@@ -198,8 +199,8 @@ public class AvlTree<E extends Comparable<E>> {
     }
 
     //RR
-    private AvlNode<E> leftRotate(AvlNode<E> root) {
-        AvlNode<E> newRoot = root.getRight();
+    private TreeNode<E> leftRotate(TreeNode<E> root) {
+        TreeNode<E> newRoot = root.getRight();
         root.setRight(newRoot.getLeft());
         newRoot.setLeft(root);
         root.setHeight(Math.max(this.height(root.getLeft()), this.height(root.getRight())) + 1);
@@ -208,22 +209,22 @@ public class AvlTree<E extends Comparable<E>> {
     }
 
     //LR
-    private AvlNode<E> leftAndRightRotate(AvlNode<E> root) {
+    private TreeNode<E> leftAndRightRotate(TreeNode<E> root) {
         root.setLeft(this.leftRotate(root.getLeft()));
         return rightRotate(root);
     }
 
     //RL
-    private AvlNode<E> rightAndLeftRotate(AvlNode<E> root) {
+    private TreeNode<E> rightAndLeftRotate(TreeNode<E> root) {
         root.setRight(this.rightRotate(root.getRight()));
         return leftRotate(root);
     }
 
-    private int height(AvlNode<E> root) {
+    private int height(TreeNode<E> root) {
         return root == null ? 0 : root.getHeight();
     }
 
-    private AvlNode<E> minimum(AvlNode<E> root) {
+    private TreeNode<E> minimum(TreeNode<E> root) {
         while (root.getLeft() != null) {
             root = root.getLeft();
         }
@@ -231,7 +232,7 @@ public class AvlTree<E extends Comparable<E>> {
         return root;
     }
 
-    private AvlNode<E> maximum(AvlNode<E> root) {
+    private TreeNode<E> maximum(TreeNode<E> root) {
         while (root.getRight() != null) {
             root = root.getRight();
         }
@@ -243,7 +244,7 @@ public class AvlTree<E extends Comparable<E>> {
         this.printTreeMiddle(root);
     }
 
-    public void printTreeMiddle(AvlNode<E> node) {
+    public void printTreeMiddle(TreeNode<E> node) {
         if (node == null) {
             return;
         }
@@ -257,7 +258,7 @@ public class AvlTree<E extends Comparable<E>> {
         this.printTreeLeft(root);
     }
 
-    public void printTreeLeft(AvlNode<E> node) {
+    public void printTreeLeft(TreeNode<E> node) {
         if (node == null) {
             return;
         }
@@ -271,61 +272,12 @@ public class AvlTree<E extends Comparable<E>> {
         this.printTreeRight(root);
     }
 
-    public void printTreeRight(AvlNode<E> node) {
+    public void printTreeRight(TreeNode<E> node) {
         if (node == null) {
             return;
         }
         this.printTreeRight(node.getRight());
         System.out.println(JSON.toJSONString(node));
         this.printTreeRight(node.getLeft());
-    }
-
-    class AvlNode<E> {
-        private E element;
-        private AvlNode<E> left;
-        private AvlNode<E> right;
-        private int height;
-
-        public AvlNode(E element) {
-            this(element, null, null);
-        }
-
-        public AvlNode(E element, AvlNode<E> left, AvlNode<E> right) {
-            this.element = element;
-            this.left = left;
-            this.right = right;
-        }
-
-        public E getElement() {
-            return element;
-        }
-
-        public void setElement(E element) {
-            this.element = element;
-        }
-
-        public AvlNode<E> getLeft() {
-            return left;
-        }
-
-        public void setLeft(AvlNode<E> left) {
-            this.left = left;
-        }
-
-        public AvlNode<E> getRight() {
-            return right;
-        }
-
-        public void setRight(AvlNode<E> right) {
-            this.right = right;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public void setHeight(int height) {
-            this.height = height;
-        }
     }
 }

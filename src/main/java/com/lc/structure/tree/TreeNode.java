@@ -21,7 +21,7 @@ public class TreeNode<E> {
     public TreeNode<E> right;
     public TreeNode<E> parent;
     public List<TreeNode<E>> children;
-    public boolean color;
+    public int color;
     public int height;
 
     public TreeNode(E value) {

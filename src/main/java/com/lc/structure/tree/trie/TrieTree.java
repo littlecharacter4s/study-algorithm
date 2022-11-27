@@ -1,4 +1,4 @@
-package com.lc.structure.tree;
+package com.lc.structure.tree.trie;
 
 public class TrieTree {
     /**
