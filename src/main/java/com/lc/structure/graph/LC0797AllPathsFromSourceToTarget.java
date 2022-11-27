@@ -22,7 +22,7 @@ public class LC0797AllPathsFromSourceToTarget {
     }
 
     List<List<Integer>> result = new ArrayList<>();
-    Deque<Integer> stack = new ArrayDeque<>();
+    Deque<Integer> stack = new LinkedList<>();
 
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
         if (graph == null || graph.length == 0 || graph[0] == null || graph[0].length == 0) {
