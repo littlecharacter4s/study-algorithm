@@ -14,73 +14,65 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UnionFindSet<V> {
-    // 值和 node 一比一映射
-    public Map<V, Node<V>> nodeMap = new HashMap<>();
     // 每个 node 和 head 的映射
     public Map<Node<V>, Node<V>> headMap = new HashMap<>();
     // 每个 head 代表的集合大小
     public Map<Node<V>, Integer> sizeMap = new HashMap<>();
 
-    public UnionFindSet(List<V> valueList) {
-        if (Objects.isNull(valueList) || valueList.isEmpty()) {
+    public UnionFindSet(Collection<Node<V>> nodeList) {
+        if (Objects.isNull(nodeList) || nodeList.isEmpty()) {
             return;
         }
-        for (V value : valueList) {
-            if (Objects.isNull(value)) {
+        for (Node<V> node : nodeList) {
+            if (Objects.isNull(node)) {
                 continue;
             }
-            Node<V> node = new Node<>(value);
-            nodeMap.put(value, node);
             headMap.put(node, node);
             sizeMap.put(node, 1);
         }
     }
 
-    public Node<V> add(V value) {
-        if (Objects.isNull(value)) {
+    public Node<V> add(Node<V> node) {
+        if (Objects.isNull(node)) {
             return null;
         }
-        Node<V> node = new Node<>(value);
-        nodeMap.put(value, node);
         headMap.put(node, node);
         sizeMap.put(node, 1);
         return node;
     }
 
-    public Node<V> remove(V value) {
-        Node<V> node = nodeMap.get(value);
+    public Node<V> remove(Node<V> node) {
         if (Objects.isNull(node)) {
             return null;
         }
         Node<V> head = headMap.get(node);
+        if (Objects.isNull(head)) {
+            return null;
+        }
         headMap.remove(node);
         sizeMap.put(head, sizeMap.get(head) - 1);
         return node;
     }
 
-    public boolean decide(V v1, V v2) {
-        if (!nodeMap.containsKey(v1) || !nodeMap.containsKey(v2)) {
-            return false;
-        }
-        return this.findHead(nodeMap.get(v1)) == this.findHead(nodeMap.get(v2));
+    public boolean decide(Node<V> node1, Node<V> node2) {
+        Node<V> head1 = this.findHead(node1);
+        Node<V> head2 = this.findHead(node2);
+        return !Objects.isNull(head1) && !Objects.isNull(head2) && head1 == head2;
     }
 
-    public void union(V v1, V v2) {
-        if (!nodeMap.containsKey(v1) || !nodeMap.containsKey(v2)) {
+    public void union(Node<V> node1, Node<V> node2) {
+        Node<V> head1 = this.findHead(node1);
+        Node<V> head2 = this.findHead(node2);
+        if (Objects.isNull(head1) || Objects.isNull(head2)) {
             return;
         }
-        Node<V> v1Head = this.findHead(nodeMap.get(v1));
-        Node<V> v2Head = this.findHead(nodeMap.get(v2));
-        if (Objects.isNull(v1Head) || Objects.isNull(v2Head)) {
-            return;
-        }
-        if (v1Head != v2Head) {
-            Integer v1HeadSize = sizeMap.get(v1Head);
-            Integer v2HeadSize = sizeMap.get(v2Head);
-            Node<V> big = v1HeadSize > v2HeadSize ? v1Head : v2Head;
-            Node<V> small = big == v1Head ? v2Head : v1Head;
+        if (head1 != head2) {
+            Integer head1Size = sizeMap.get(head1);
+            Integer head2Size = sizeMap.get(head2);
+            Node<V> big = head1Size > head2Size ? head1 : head2;
+            Node<V> small = big == head1 ? head2 : head1;
             headMap.put(small, big);
-            sizeMap.put(big, v1HeadSize + v2HeadSize);
+            sizeMap.put(big, head1Size + head2Size);
             sizeMap.remove(small);
         }
     }
