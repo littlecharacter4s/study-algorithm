@@ -9,6 +9,8 @@ import java.util.*;
  * @author gujixian
  * @since 2022/11/25
  */
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,6 +53,8 @@ public class Graph {
     }
 
 
+    @Getter
+    @Setter
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor

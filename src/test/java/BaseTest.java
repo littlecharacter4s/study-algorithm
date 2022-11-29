@@ -35,6 +35,8 @@ public class BaseTest {
         graph.graph.put(3, new HashSet<>(Arrays.asList(new Pair<>(0, 1), new Pair<>(2, 1), new Pair<>(4, 1))));
         graph.graph.put(4, new HashSet<>(Arrays.asList(new Pair<>(0, 1), new Pair<>(3, 1))));
         this.print(graph);
+
+        PriorityQueue<Pair<Integer, Integer>> heap = new PriorityQueue<>((o1, o2) -> o1.getValue() - o2.getValue());
     }
 
     private void print(Graph graph) {
