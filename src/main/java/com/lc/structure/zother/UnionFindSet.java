@@ -85,6 +85,10 @@ public class UnionFindSet<V> {
         }
     }
 
+    public int getSetSize() {
+        return sizeMap.size();
+    }
+
     private Node<V> findHead(Node<V> node) {
         if (Objects.isNull(node)) {
             return null;
