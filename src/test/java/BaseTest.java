@@ -14,6 +14,38 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class BaseTest {
     @Test
     public void test() {
+        this.testStack();
+        // this.testGraph();
+    }
+
+    private void testStack() {
+        // 这个test的目的是，切记：递归的过程中是可以记录一些东西的！！！
+        Deque<Integer> stack = new LinkedList<>(Arrays.asList(1, 2, 3));
+        System.out.println(stack);
+        this.reverse(stack);
+        System.out.println(stack);
+    }
+
+    private void reverse(Deque<Integer> stack) {
+        if (stack == null || stack.isEmpty()) {
+            return;
+        }
+        int bottom = this.getStackBottomElement(stack);
+        this.reverse(stack);
+        stack.offerLast(bottom);
+    }
+
+    private Integer getStackBottomElement(Deque<Integer> stack) {
+        Integer result = stack.pollLast();
+        if (stack.isEmpty()) {
+            return result;
+        }
+        int bottom = this.getStackBottomElement(stack);
+        stack.offerLast(result);
+        return bottom;
+    }
+
+    private void testGraph() {
         Integer[][] matrix = new Integer[3][3];
         matrix[0][0] = 0;
         matrix[0][1] = 1;
@@ -35,8 +67,6 @@ public class BaseTest {
         graph.graph.put(3, new HashSet<>(Arrays.asList(new Pair<>(0, 1), new Pair<>(2, 1), new Pair<>(4, 1))));
         graph.graph.put(4, new HashSet<>(Arrays.asList(new Pair<>(0, 1), new Pair<>(3, 1))));
         this.print(graph);
-
-        PriorityQueue<Pair<Integer, Integer>> heap = new PriorityQueue<>((o1, o2) -> o1.getValue() - o2.getValue());
     }
 
     private void print(Graph graph) {
