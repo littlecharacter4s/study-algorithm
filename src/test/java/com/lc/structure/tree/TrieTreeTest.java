@@ -12,14 +12,14 @@ public class TrieTreeTest {
         trieTree.insert("axy");
         trieTree.insert("bcd");
         trieTree.insert("cde");
-        trieTree.traversal(trieTree.getRoot());
+        trieTree.traversal(new TrieTree.Node());
     }
 
     @Test
     public void testDelete() throws Exception {
         this.testInsert();
         trieTree.delete("axy");
-        trieTree.traversal(trieTree.getRoot());
+        trieTree.traversal(new TrieTree.Node());
     }
 
     @Test
