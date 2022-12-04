@@ -12,40 +12,29 @@ package com.lc.structure.linear.chain;
  * @since 2022/12/3
  */
 public class LC0025ReverseNodesInKGroup {
-    public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        ListNode node = head;
-        for (int i = 2; i < 6; i++) {
-            node.next = new ListNode(i);
-            node = node.next;
-        }
-        ListNode nodex = new LC0025ReverseNodesInKGroup().reverseKGroup(head, 2);
-        while (nodex != null) {
-            System.out.print(nodex.val + " ");
-            nodex = nodex.next;
-        }
-    }
     public ListNode reverseKGroup(ListNode head, int k) {
+        // 第一组特殊处理
         ListNode groupTail = this.getGroupEnd(head, k);
         if (groupTail == null || k <= 1) {
             return head;
         }
         ListNode result = groupTail;
-        // 第一组比较特殊，预先处理
         ListNode groupHead = head;
         ListNode nextHead = groupTail.next;
         this.reverse(groupHead, groupTail);
-        // 从第二组开始，循环处理
-        groupTail = this.getGroupEnd(nextHead, k);
-        while (groupTail != null) {
+        // 下一组如果没有就没必要继续了
+        while (nextHead != null) {
+            groupTail = this.getGroupEnd(nextHead, k);
+            // 最后一组不足 k 个节点时，保持原顺序
+            if (groupTail == null) {
+                groupHead.next = nextHead;
+                return result;
+            }
             groupHead.next = groupTail;
             groupHead = nextHead;
             nextHead = groupTail.next;
             this.reverse(groupHead, groupTail);
-            groupTail = this.getGroupEnd(nextHead, k);
         }
-        // 处理最后一组
-        groupHead.next = nextHead;
         return result;
     }
 
