@@ -69,7 +69,7 @@ public class LC0002AddTwoNumbers {
         return head;
     }
 
-    static class ListNode {
+    private static class ListNode {
         int val;
         ListNode next;
 
