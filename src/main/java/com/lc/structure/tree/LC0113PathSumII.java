@@ -29,7 +29,8 @@ public class LC0113PathSumII {
         List<List<Integer>> result = new LC0113PathSumII().pathSum(root, 22);
         System.out.println(JSON.toJSONString(result));
 
-
+        // 测试冲突
+        System.out.println("测试冲突");
     }
 
     private List<Integer> result = new ArrayList<>();
