@@ -42,7 +42,7 @@ public class LC0102BinaryTreeLevelOrderTraversal {
         return result;
     }
 
-    static class TreeNode {
+    private static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
