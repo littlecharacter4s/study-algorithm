@@ -1,6 +1,15 @@
 package com.lc.structure.tree;
 
 /**
+ * 题目：验证二叉搜索树
+ * 描述：
+ * 给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。
+ * 有效 二叉搜索树定义如下：
+ * 节点的左子树只包含 小于 当前节点的数。
+ * 节点的右子树只包含 大于 当前节点的数。
+ * 所有左子树和右子树自身必须也是二叉搜索树。
+ * 分析：通过向左右子树要信息（是否是二叉搜索树、最小值、最大值），判断当前子树是否是二叉搜索树，并确定最大、最小值，包装信息向上返回
+ * 链接：https://leetcode.cn/problems/validate-binary-search-tree/description/
  * @author gujixian
  * @since 2022/12/5
  */
