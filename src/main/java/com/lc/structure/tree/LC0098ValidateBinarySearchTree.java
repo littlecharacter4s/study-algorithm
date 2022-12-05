@@ -20,6 +20,7 @@ public class LC0098ValidateBinarySearchTree {
         System.out.println(new LC0098ValidateBinarySearchTree().isValidBST(root));
     }
 
+    
     public boolean isValidBST(TreeNode root) {
         if (root == null) {
             return false;
