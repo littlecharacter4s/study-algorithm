@@ -63,6 +63,9 @@ public class NC0001BinaryTreeDeepFirstSearch {
         }
     }
 
+    /**
+     * 中序遍历：任何树都是可以被左边界分解的 -> 只要有左边界就把左边界压栈
+     */
     private void headMiddleDFS(TreeNode root) {
         Deque<TreeNode> stack = new LinkedList<>();
         TreeNode node = root;
