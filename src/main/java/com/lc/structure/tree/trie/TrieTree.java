@@ -84,12 +84,13 @@ public class TrieTree {
         return node.pass;//有几个单词经过 就有几个
     }
 
-    public void traversal(Node node) {}
+    public void traversal(Node node) {
+    }
 
     public static class Node {
         public int pass;
         public int end;
-        // 如果想有序，可以使用TreeMap
+        // 如果想有序，可以使用TreeMap：字符的 ASCII 码 -> nextNode
         public HashMap<Integer, Node> nexts;
 
         public Node() {
