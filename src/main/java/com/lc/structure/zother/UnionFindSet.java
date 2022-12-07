@@ -14,10 +14,15 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UnionFindSet<V> {
-    // 每个 node 和 head 的映射
+    // 工程：每个 node 和 head 的映射
     public Map<Node<V>, Node<V>> headMap = new HashMap<>();
-    // 每个 head 代表的集合大小
+    // 工程：每个 head 代表的集合大小
     public Map<Node<V>, Integer> sizeMap = new HashMap<>();
+
+    // 面试：每个 node 和 head 的映射
+    // public int[] headArray;
+    // 面试：每个 head 代表的集合大小
+    // public int[] headSize;
 
     public UnionFindSet(Collection<Node<V>> nodeList) {
         if (Objects.isNull(nodeList) || nodeList.isEmpty()) {
