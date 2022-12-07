@@ -306,7 +306,7 @@ public class NC0003Sort {
                 count[j] += count[j - 1];
             }
             // 将 nums 中的数放入 help 中按照当前十进制位排序
-            // 这里将 nums 从右开始放入 help，表示十进制位相同的数是先进先出的队列
+            // 这里将 nums 从右开始放入 help，表示十进制位相同的数是先进先出的队列（保持稳定）
             for (int k = nums.length - 1; k >= 0; k--) {
                 int x = this.getDigitNum(nums[k], i);
                 help[--count[x]] = nums[k];
