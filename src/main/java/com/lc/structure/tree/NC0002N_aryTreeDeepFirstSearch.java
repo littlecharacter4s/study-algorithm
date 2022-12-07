@@ -1,11 +1,14 @@
 package com.lc.structure.tree;
 
 import com.alibaba.fastjson.JSON;
-import com.lc.structure.linear.stack.ArrayStack;
 
 import java.util.*;
 
-public class NC0001DeepFirstSearchN_aryTree {
+/**
+ * @author gujixian
+ * @since 2022/12/7
+ */
+public class NC0002N_aryTreeDeepFirstSearch {
     private final List<List<Integer>> result = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -15,7 +18,7 @@ public class NC0001DeepFirstSearchN_aryTree {
         root.children.get(1).children = Arrays.asList(new Node(7), new Node(8));
         root.children.get(2).children = Arrays.asList(new Node(9), new Node(10));
 
-        List<List<Integer>> result = new NC0001DeepFirstSearchN_aryTree().deepOrder(root);
+        List<List<Integer>> result = new NC0002N_aryTreeDeepFirstSearch().deepOrder(root);
         System.out.println(JSON.toJSONString(result));
     }
 
