@@ -9,6 +9,12 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 /**
+ * 题目：滑动窗口最大值
+ * 描述：
+ * 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+ * 返回 滑动窗口中的最大值 。
+ * 分析：使用双端队列实现滑动窗口 -> 并没有想象的那么简单，练熟！！！
+ * 链接：https://leetcode.cn/problems/sliding-window-maximum/description/
  * @author gujixian
  * @since 2022/12/22
  */

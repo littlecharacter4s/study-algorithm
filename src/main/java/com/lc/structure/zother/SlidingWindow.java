@@ -9,6 +9,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
+ * 滑动窗口
  * @author gujixian
  * @since 2022/12/22
  */
