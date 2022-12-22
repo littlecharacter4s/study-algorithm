@@ -1,11 +1,7 @@
-package com.lc.algorithm;
+package com.lc.structure.zother;
 
 import com.alibaba.fastjson.JSON;
-import com.lc.structure.zother.SlidingWindow;
 
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Objects;
 
 /**
