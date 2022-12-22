@@ -7,7 +7,7 @@ import com.google.common.cache.LoadingCache;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class NC0010RateLimiter {
+public class NC0008RateLimiter {
     private int limit = 15;
     private long lastTime = 0;
 

@@ -1,15 +1,14 @@
 package com.lc.algorithm;
 
-import com.lc.algorithm.NC0010RateLimiter;
 import org.junit.Test;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class NC0010RateLimiterTest {
+public class NC0008RateLimiterTest {
     @Test
     public void testSlidingTimeWindow() throws Exception {
-        NC0010RateLimiter limiter = new NC0010RateLimiter();
+        NC0008RateLimiter limiter = new NC0008RateLimiter();
         Executors.newScheduledThreadPool(5).scheduleWithFixedDelay(() -> {
             try {
                 if (!limiter.slidingTimeWindow()) {

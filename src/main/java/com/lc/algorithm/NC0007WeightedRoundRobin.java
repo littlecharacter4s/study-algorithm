@@ -10,12 +10,12 @@ import java.util.Objects;
  * 1、每轮取当前权重最大的节点；
  * 2、每轮每个节点的当前节点权重都要加上初始权重，就是为了每轮下来，所有节点的当前节点之和等于所有节点的初始权重之和
  */
-public class NC0009WeightedRoundRobin {
+public class NC0007WeightedRoundRobin {
     private volatile List<Server> serverList = new ArrayList<>();
     private volatile Server selectServer = null;
     private volatile int sumWeight;
 
-    public NC0009WeightedRoundRobin(List<Server> serverList) {
+    public NC0007WeightedRoundRobin(List<Server> serverList) {
         this.serverList = serverList;
         sumWeight = 0;
         for (Server server : serverList) {

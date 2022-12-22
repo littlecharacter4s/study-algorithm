@@ -3,7 +3,7 @@ package com.lc.algorithm;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class NC0007Lru<K, V> extends LinkedHashMap<K, V> {
+public class NC0005Lru<K, V> extends LinkedHashMap<K, V> {
     /**
      * 定义缓存的容量
      */
@@ -11,7 +11,7 @@ public class NC0007Lru<K, V> extends LinkedHashMap<K, V> {
     private static final long serialVersionUID = 1L;
 
     //带参数的构造器
-    NC0007Lru(int capacity) {
+    NC0005Lru(int capacity) {
         //调用LinkedHashMap的构造器，传入以下参数
         super(new Float(capacity / 0.75f).intValue() + 1, 0.75f, true);
         //传入指定的缓存最大容量

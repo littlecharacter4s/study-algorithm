@@ -1,13 +1,12 @@
 package com.lc.algorithm;
 
 import com.alibaba.fastjson.JSON;
-import com.lc.algorithm.NC0003Sort;
-import com.lc.algorithm.NC0004ReservoirSampling;
+import com.lc.algorithm.sort.NC0003Sort;
 import org.junit.Test;
 
 import java.util.Random;
 
-public class NC0004ReservoirSamplingTest {
+public class NC0001ReservoirSamplingTest {
     @Test
     public void sampling() throws Exception {
         final int N = 1000;
@@ -20,7 +19,7 @@ public class NC0004ReservoirSamplingTest {
         new NC0003Sort().quickSort(pool, 0, pool.length - 1);
         System.out.println(JSON.toJSONString(pool));
         System.out.println("样本：");
-        int[] sample = new NC0004ReservoirSampling().sampling(pool, K);
+        int[] sample = new NC0001ReservoirSampling().sampling(pool, K);
         new NC0003Sort().mergeSort(sample, 0, sample.length - 1);
         System.out.println(JSON.toJSONString(sample));
     }

@@ -1,15 +1,14 @@
 package com.lc.algorithm;
 
-import com.lc.algorithm.NC0007Lru;
 import org.junit.Test;
 
 import java.util.Map;
 
-public class NC0007LruTest {
+public class NC0005LruTest {
     @Test
     public void testLur() throws Exception {
         // 指定缓存最大容量为4
-        Map<Integer, String> map = new NC0007Lru<>(4);
+        Map<Integer, String> map = new NC0005Lru<>(4);
         // 先放满4个为净
         map.put(1, "a");
         map.put(2, "b");

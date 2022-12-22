@@ -13,7 +13,7 @@ import com.lc.structure.linear.stack.ArrayStack;
  * 第二步：计算后缀表达式。
  * 从左到右遍历表达式的每个数字和符号，遇到数字就进栈，遇到是符号，就将处于栈顶的两个数字出栈，进行计算，然后计算结果进栈，一直到最终获得结果。
  */
-public class NC0005CalculateArithmeticExpression {
+public class NC0002CalculateArithmeticExpression {
     public float calculate(String expression) {
         float result = 0.0F;
         expression = this.convert(expression);

@@ -1,13 +1,12 @@
 package com.lc.algorithm;
 
-import com.lc.algorithm.NC0007Lfu;
 import org.junit.Test;
 
-public class NC0007LfuTest {
+public class NC0004LfuTest {
 
     @Test
     public void testLfu() throws Exception {
-        NC0007Lfu<String, String> cache = new NC0007Lfu<>(3);
+        NC0004Lfu<String, String> cache = new NC0004Lfu<>(3);
         cache.put("a", "a");
         cache.put("b", "b");
         cache.put("c", "c");

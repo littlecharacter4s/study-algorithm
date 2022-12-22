@@ -10,7 +10,7 @@ import java.util.Random;
  * 3.然后从第i=k+1个元素开始遍历池，随机从[0,i+1)抽取一个下标r，若r<k，则将r位置的抽样替换为i位置的样本；否则什么都不做。
  *   当遍历完所有元素之后，数组中剩下的元素即为所需采取的样本。
  */
-public class NC0004ReservoirSampling {
+public class NC0001ReservoirSampling {
     public int[] sampling(int[] pool, int k) {
         int[] result = new int[k];
         // 前k个元素直接放入数组中

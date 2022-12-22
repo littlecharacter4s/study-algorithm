@@ -6,7 +6,7 @@ import java.util.TreeMap;
 /**
  * https://www.cnblogs.com/xrq730/p/5186728.html
  */
-public class NC0006ConsistentHash {
+public class NC0003ConsistentHash {
     /**
      * 待添加入Hash环的服务器列表
      */

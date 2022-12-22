@@ -1,4 +1,4 @@
-package com.lc.algorithm;
+package com.lc.algorithm.sort;
 
 import com.alibaba.fastjson.JSON;
 

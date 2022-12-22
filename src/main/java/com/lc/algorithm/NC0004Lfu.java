@@ -4,17 +4,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NC0007Lfu <K, V> extends HashMap<K, V> {
+public class NC0004Lfu<K, V> extends HashMap<K, V> {
     private static final int DEFAULT_MAX_SIZE = 16;
     private int maxSize = DEFAULT_MAX_SIZE;
 
     Map<K, HitRate> km = new HashMap<K, HitRate>();
 
-    public NC0007Lfu() {
+    public NC0004Lfu() {
         this(DEFAULT_MAX_SIZE);
     }
 
-    public NC0007Lfu(int maxSize) {
+    public NC0004Lfu(int maxSize) {
         super(maxSize);
         this.maxSize = maxSize;
     }

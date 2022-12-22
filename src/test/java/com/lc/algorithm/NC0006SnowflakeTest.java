@@ -1,15 +1,14 @@
 package com.lc.algorithm;
 
-import com.lc.algorithm.NC0008Snowflake;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-public class NC0008SnowflakeTest {
+public class NC0006SnowflakeTest {
     @Test
     public void testGetId() throws Exception {
-        NC0008Snowflake snowflake = new NC0008Snowflake();
+        NC0006Snowflake snowflake = new NC0006Snowflake();
         long baseTimestamp = LocalDateTime.of(2019, 1, 1, 0, 0, 0).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         long timestamp = System.currentTimeMillis();
         long difference = timestamp - baseTimestamp;

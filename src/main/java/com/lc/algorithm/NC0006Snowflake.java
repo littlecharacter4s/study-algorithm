@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 1bit(不用) - 41bit(时间戳，毫秒) - 10bit(工作机器id，5bit-datecenterId + 5bit-workerId) - 12bit(序列号)
  */
-public class NC0008Snowflake {
+public class NC0006Snowflake {
     private final long baseTimestamp = LocalDateTime.of(2019, 1, 1, 0, 0, 0).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
     private final long datecenterIdBits = 5L;
     private final long workerIdBits = 5L;

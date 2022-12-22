@@ -2,7 +2,7 @@ package com.lc.algorithm;
 
 import java.util.Arrays;
 
-public class NC0012TopK {
+public class NC0009TopK {
     private static int result = 0;
 
     public static void main(String[] args) {
