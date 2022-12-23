@@ -67,7 +67,7 @@ public class KMP {
     /**
      * 下标换算版：难理解（可以忽略）
      */
-    private int[] getHelpV2(char[] c) {
+    private int[] getHelpX(char[] c) {
         if (c.length == 1) {
             return new int[]{-1};
         }
