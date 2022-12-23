@@ -34,7 +34,7 @@ public class KMP {
         // 预处理
         char[] c1 = s1.toCharArray();
         char[] c2 = s2.toCharArray();
-        int[] help = getHelp(c2);
+        int[] next = getNext(c2);
         int i = 0;
         int j = 0;
         // 匹配
@@ -42,10 +42,10 @@ public class KMP {
             if (c1[i] == c2[j]) {
                 i++;
                 j++;
-            } else if (help[j] == -1) {
+            } else if (next[j] == -1) {
                 i++;
             } else {
-                j = help[j];
+                j = next[j];
             }
         }
         return j == c2.length ? (i - j) : -1;
@@ -54,52 +54,52 @@ public class KMP {
     /**
      * 正常版：好理解
      */
-    private int[] getHelp(char[] c) {
+    private int[] getNext(char[] c) {
         if (c.length == 1) {
             return new int[]{-1};
         }
-        int[] help = new int[c.length];
-        help[0] = -1;
-        help[1] = 0;
+        int[] next = new int[c.length];
+        next[0] = -1;
+        next[1] = 0;
         int i = 2;
-        while (i < help.length) {
-            int j = help[i - 1];
+        while (i < next.length) {
+            int j = next[i - 1];
             while (j != -1) {
                 if (c[i - 1] == c[j]) {
-                    help[i++] = ++j;
+                    next[i++] = ++j;
                     break;
                 } else {
-                    j = help[j];
+                    j = next[j];
                 }
             }
             if (j == -1) {
-                help[i++] = 0;
+                next[i++] = 0;
             }
         }
-        return help;
+        return next;
     }
 
     /**
      * 下标换算版：难理解（可以忽略）
      */
-    private int[] getHelpX(char[] c) {
+    private int[] getNextX(char[] c) {
         if (c.length == 1) {
             return new int[]{-1};
         }
-        int[] help = new int[c.length];
-        help[0] = -1;
-        help[1] = 0;
+        int[] next = new int[c.length];
+        next[0] = -1;
+        next[1] = 0;
         int i = 2;
         int j = 0;
-        while (i < help.length) {
+        while (i < next.length) {
             if (c[i - 1] == c[j]) {
-                help[i++] = ++j;
+                next[i++] = ++j;
             } else if (j > 0) {
-                j = help[j];
+                j = next[j];
             } else {
-                help[i++] = 0;
+                next[i++] = 0;
             }
         }
-        return help;
+        return next;
     }
 }
