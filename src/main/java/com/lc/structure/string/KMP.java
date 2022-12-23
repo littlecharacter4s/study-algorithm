@@ -8,7 +8,22 @@ public class KMP {
     public static void main(String[] args) {
         String s1 = "ijklmnabcabxyzsrtabcabdxxx";
         String s2 = "abcabd";
+        System.out.println(s1.indexOf(s2));
         System.out.println(new KMP().indexOf(s1, s2));
+        System.out.println("-----JDK VS KMP-----");
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            s1.indexOf(s2);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("JDK：" + (end - start) + "ms");
+        KMP kmp = new KMP();
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            kmp.indexOf(s1, s2);
+        }
+        end = System.currentTimeMillis();
+        System.out.println("KMP：" + (end - start) + "ms");
     }
 
     public int indexOf(String s1, String s2) {
