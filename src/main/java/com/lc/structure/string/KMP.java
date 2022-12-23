@@ -38,8 +38,6 @@ public class KMP {
 
     /**
      * 正常版：好理解
-     * @param c
-     * @return
      */
     private int[] getHelp(char[] c) {
         if (c.length == 1) {
@@ -68,8 +66,6 @@ public class KMP {
 
     /**
      * 下标换算版：难理解（可以忽略）
-     * @param c
-     * @return
      */
     private int[] getHelpV2(char[] c) {
         if (c.length == 1) {
