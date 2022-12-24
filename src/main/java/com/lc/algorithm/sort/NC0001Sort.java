@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSON;
 
 import java.util.*;
 
-public class NC0003Sort {
+public class NC0001Sort {
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
-        System.out.println("排序结果：" + JSON.toJSONString(new NC0003Sort().sortArray(new int[]{14,20,11,52,62,104,215})));
+        System.out.println("排序结果：" + JSON.toJSONString(new NC0001Sort().sortArray(new int[]{14,20,11,52,62,104,215})));
     }
 
     public int[] sortArray(int[] nums) {

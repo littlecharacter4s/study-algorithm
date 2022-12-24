@@ -1,7 +1,7 @@
 package com.lc.algorithm;
 
 import com.alibaba.fastjson.JSON;
-import com.lc.algorithm.sort.NC0003Sort;
+import com.lc.algorithm.sort.NC0001Sort;
 import org.junit.Test;
 
 import java.util.Random;
@@ -16,11 +16,11 @@ public class NC0001ReservoirSamplingTest {
             pool[i] = new Random().nextInt(N);
         }
         System.out.println("蓄水池：");
-        new NC0003Sort().quickSort(pool, 0, pool.length - 1);
+        new NC0001Sort().quickSort(pool, 0, pool.length - 1);
         System.out.println(JSON.toJSONString(pool));
         System.out.println("样本：");
         int[] sample = new NC0001ReservoirSampling().sampling(pool, K);
-        new NC0003Sort().mergeSort(sample, 0, sample.length - 1);
+        new NC0001Sort().mergeSort(sample, 0, sample.length - 1);
         System.out.println(JSON.toJSONString(sample));
     }
 }
