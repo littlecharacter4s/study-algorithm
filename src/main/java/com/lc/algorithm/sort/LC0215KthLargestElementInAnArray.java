@@ -30,10 +30,30 @@ public class LC0215KthLargestElementInAnArray {
         if (nums == null || nums.length < k) {
             return -1;
         }
-        return quickSort(nums, 0, nums.length - 1, k - 1);
+        return quickSortV1(nums, 0, nums.length - 1, k - 1);
     }
 
-    private int quickSort(int[] nums, int left, int right, int k) {
+    /**
+     * 迭代版
+     */
+    private int quickSortV1(int[] nums, int left, int right, int k) {
+        while (left < right) {
+            int[] equal = this.partition(nums, left, right);
+            if (equal[0] + 1 <= k && k <= equal[1] - 1) { // 等于区域包含第k大的数
+                return nums[k];
+            } else if (equal[0] + 1 > k) { // 第k大的数在小于区域
+                right = equal[0];
+            } else { // 第k大的数在大于区域
+                left = equal[1];
+            }
+        }
+        return nums[left];
+    }
+
+    /**
+     * 递归版
+     */
+    private int quickSortV2(int[] nums, int left, int right, int k) {
         if (left == right) {
             return nums[left];
         }
@@ -41,9 +61,9 @@ public class LC0215KthLargestElementInAnArray {
         if (equal[0] + 1 <= k && k <= equal[1] - 1) { // 等于区域包含第k大的数
             return nums[k];
         } else if (equal[0] + 1 > k) { // 第k大的数在小于区域
-            return this.quickSort(nums, left, equal[0], k);
+            return this.quickSortV2(nums, left, equal[0], k);
         } else { // 第k大的数在大于区域
-            return this.quickSort(nums, equal[1], right, k);
+            return this.quickSortV2(nums, equal[1], right, k);
         }
     }
 
