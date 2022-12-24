@@ -37,32 +37,31 @@ public class Manacher {
         int center = -1;
         // 构建回文半径数组
         for (int i = 0; i < cs.length; i++) {
+            // i 位置的回文半径
+            int r = 0;
             if (i > right) { // 整体最右回文边界罩不住 i 位置
-                int r = getRadius(cs, i, i);
-                radius[i] = r;
-                // 重新计算整体最右回文边界和对应的回文中心
-                int newRight = i + r - 1;
-                if (newRight > right) {
-                    right = newRight;
-                    center = i;
-                }
+                r = getRadius(cs, i, i);
             } else { // 整体最右回文边界罩得住 i 位置
+                /*
+                 * x x   a   b   c        d         e    d c b    a   t    s   t a b c d e d   c   x x
+                 *     iLeft   cLeft--iDistance--iCenter       iRight   center           i   right
+                 */
                 int cLeft = 2 * center - right;
                 int iCenter = 2 * center - i;
                 int iLeft = iCenter - radius[iCenter] + 1;
                 int iDistance = iCenter - cLeft + 1;
                 if (iLeft == cLeft) {
-                    int r = iDistance + getRadius(cs, i - iDistance, i + iDistance);
-                    radius[i] = r;
-                    // 重新计算整体最右回文边界和对应的回文中心
-                    int newRight = i + r - 1;
-                    if (newRight > right) {
-                        right = newRight;
-                        center = i;
-                    }
+                    r = iDistance + getRadius(cs, i - iDistance, i + iDistance);
                 } else {
-                    radius[i] = Math.min(iDistance, radius[iCenter]);
+                    r = Math.min(iDistance, radius[iCenter]);
                 }
+            }
+            radius[i] = r;
+            // 重新计算整体最右回文边界和对应的回文中心
+            int newRight = i + r - 1;
+            if (newRight > right) {
+                right = newRight;
+                center = i;
             }
         }
         return radius;
