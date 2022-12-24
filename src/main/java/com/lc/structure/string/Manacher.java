@@ -10,7 +10,16 @@ import com.alibaba.fastjson.JSON;
  */
 public class Manacher {
     public static void main(String[] args) {
-        String s = "xabcbastsabcbay";
+        String s = "cbbd";
+        char[] cs = new Manacher().manacherString(s);
+        System.out.print("[");
+        for (int i = 0; i < cs.length; i++) {
+            if (i == cs.length - 1) {
+                System.out.println(cs[i] + "]");
+            } else {
+                System.out.print(cs[i] + ",");
+            }
+        }
         System.out.println(JSON.toJSONString(new Manacher().manacher(s)));
     }
 
@@ -18,9 +27,8 @@ public class Manacher {
         if (s == null || s.length() == 0) {
             return new int[]{};
         }
-        // abc -> a#b#c
+        // abc -> #a#b#c#
         char[] cs = manacherString(s);
-        System.out.println(JSON.toJSONString(cs));
         // 每个位置的回文半径
         int[] radius = new int[cs.length];
         // 整体最右回文边界
@@ -60,6 +68,17 @@ public class Manacher {
         return radius;
     }
 
+    public char[] manacherString(String s) {
+        char[] cs = new char[s.length() * 2 + 1];
+        cs[0] = '#';
+        int index = 1;
+        for (char c : s.toCharArray()) {
+            cs[index++] = c;
+            cs[index++] = '#';
+        }
+        return cs;
+    }
+
     private int getRadius(char[] cs, int left, int right) {
         int count = 0;
         while (left >= 0 && right < cs.length && cs[left] == cs[right]) {
@@ -68,17 +87,5 @@ public class Manacher {
             right++;
         }
         return count;
-    }
-
-    private char[] manacherString(String s) {
-        char[] cs = new char[s.length() * 2 - 1];
-        int index = 0;
-        for (char c : s.toCharArray()) {
-            cs[index++] = c;
-            if (index < cs.length) {
-                cs[index++] = '#';
-            }
-        }
-        return cs;
     }
 }

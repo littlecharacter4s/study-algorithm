@@ -22,8 +22,13 @@ package com.lc.structure.string;
 public class LC0647PalindromicSubstrings {
     public static void main(String[] args) {
         String s = "xabcbastsabcbay";
-        System.out.println(new LC0647PalindromicSubstrings().countSubstrings(s));
-        // System.out.println(new Manacher().manacher(s));
+        System.out.println("暴力解：" + new LC0647PalindromicSubstrings().countSubstrings(s));
+        int[] radius = new Manacher().manacher(s);
+        int result = 0;
+        for (int r : radius) {
+            result += r / 2;
+        }
+        System.out.println("Manacher解：" + result);
     }
 
     public int countSubstrings(String s) {
