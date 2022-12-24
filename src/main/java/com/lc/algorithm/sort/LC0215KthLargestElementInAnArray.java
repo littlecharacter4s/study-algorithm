@@ -30,21 +30,20 @@ public class LC0215KthLargestElementInAnArray {
         if (nums == null || nums.length < k) {
             return -1;
         }
-        return quickSort(nums, 0, nums.length - 1, k);
+        return quickSort(nums, 0, nums.length - 1, k - 1);
     }
 
     private int quickSort(int[] nums, int left, int right, int k) {
+        if (left == right) {
+            return nums[left];
+        }
         int[] equal = this.partition(nums, left, right);
-        if (equal[0] == k - 2) { // 小于区域有边界+1 == k-1
-            return nums[equal[0] + 1];
-        } else if (equal[0] < k - 2) { // 小于区域有边界+1 < k-1
-            if (equal[1] >= k) { // 等于区域包含第k大的数
-                return nums[equal[1] - 1];
-            } else { // 小于等于区域都不包含第k大的数 -> 第k大的数在大于区域内
-                return this.quickSort(nums, equal[1], right, k);
-            }
-        } else { // 小于区域有边界+1 > k-1 -> 第k大的数在小于区域内
+        if (equal[0] + 1 <= k && k <= equal[1] - 1) { // 等于区域包含第k大的数
+            return nums[k];
+        } else if (equal[0] + 1 > k) { // 第k大的数在小于区域
             return this.quickSort(nums, left, equal[0], k);
+        } else { // 第k大的数在大于区域
+            return this.quickSort(nums, equal[1], right, k);
         }
     }
 
