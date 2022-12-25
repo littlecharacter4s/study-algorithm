@@ -1,5 +1,9 @@
 package com.lc.structure.linear.queue;
 
+/**
+ * 环形队列：性能差，比另一个，常数项时间复杂度高
+ * @param <T>
+ */
 public class CircleQueue<T> {
     private final int capacity;
     private int getIndex = 0;

@@ -1,5 +1,9 @@
 package com.lc.structure.linear.queue;
 
+/**
+ * 环形队列：性能好，比另一个，常数项时间复杂度低
+ * @param <T>
+ */
 public class CycleQueue<T> {
     private final int capacity;
     private int size = 0;
