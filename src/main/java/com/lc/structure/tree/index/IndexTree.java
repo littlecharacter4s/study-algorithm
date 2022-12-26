@@ -9,7 +9,13 @@ import com.alibaba.fastjson.JSON;
  * @since 2022/12/26
  */
 public class IndexTree {
-    // IndexTree 的主体数组！！！下标从1开始！！！
+    /**
+     * IndexTree 的主体数组！！！下标从1开始！！！
+     *
+     * 规律:
+     * tree[index] 表示 nums[] 数组[(index ^ (index & -index) + 1)...index] 范围上的累加和
+     * index ^ (index & -index) + 1：表示 index 抹掉最后一个 1 再加 1
+     */
     private int[] tree;
     private int N;
     private int[] nums;
