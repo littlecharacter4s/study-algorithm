@@ -1,7 +1,6 @@
 package com.lc.structure.string;
 
 import com.alibaba.fastjson.JSON;
-import com.lc.structure.tree.trie.TrieTree;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +9,7 @@ import java.util.*;
 
 /**
  * AC 自动机
+ *
  * @author gujixian
  * @since 2022/12/28
  */
