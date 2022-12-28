@@ -101,7 +101,7 @@ public class ACAutomaton {
         Node node = root;
         // 每个字符的匹配都会沿着 fail 走一圈
         for (int i = 0; i < cs.length; i++) {
-            // 当前字符匹配成功 ? 跳出 while 执行下面匹配成功的逻辑 : 沿着 fail 走向下一条路径，遇到 root 结束
+            // 当前字符匹配成功 ? 跳出 while 执行下面匹配成功的逻辑 : 沿着 其父节点的 fail 走向下一条路径（另一个字符串）继续匹配，直到匹配成功或遇到 root
             while (!node.nexts.containsKey(cs[i]) && node != root) {
                 node = node.fail;
             }
