@@ -42,6 +42,7 @@ public class TrieTree {
                 index = (int) chars[i];
                 if (--node.nexts.get(index).pass == 0) {
                     node.nexts.remove(index);//删除节点，防止内存泄露
+                    return;
                 }
                 node = node.nexts.get(index);
             }
@@ -98,5 +99,16 @@ public class TrieTree {
             end = 0;
             nexts = new HashMap<>();
         }
+    }
+
+    public static void main(String[] args) {
+        TrieTree tree = new TrieTree();
+        tree.insert("美国");
+        tree.insert("日本");
+        tree.insert("澳大利亚");
+        tree.insert("澳洲");
+        tree.insert("澳门");
+        tree.delete("澳大利亚");
+        System.out.println(tree.search("澳大利亚"));
     }
 }

@@ -24,8 +24,8 @@ public class ACAutomaton {
         Node node = root;
         node.pass++;
         for (char c : cs) {
-            root.nexts.putIfAbsent(c, new Node());
-            node = root.nexts.get(c);
+            node.nexts.putIfAbsent(c, new Node());
+            node = node.nexts.get(c);
             node.pass++;
         }
         node.end = words;
@@ -52,6 +52,7 @@ public class ACAutomaton {
         for (char c : cs) {
             if (--node.nexts.get(c).pass == 0) {
                 node.nexts.remove(c);
+                return;
             }
             node = node.nexts.get(c);
         }
@@ -61,8 +62,18 @@ public class ACAutomaton {
     }
 
     public void build() {
-        root.fail = null;
         Queue<Node> queue = new LinkedList<>();
+        // 先清除 fail 指针
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            node.fail = null;
+            for (Node next : node.nexts.values()) {
+                queue.offer(next);
+            }
+        }
+        // 再重新设置 fail 指针
+        root.fail = null;
         queue.offer(root);
         while (!queue.isEmpty()) {
             Node node = queue.poll();
@@ -130,6 +141,9 @@ public class ACAutomaton {
         acAutomaton.add("日本");
         acAutomaton.add("美国");
         acAutomaton.add("澳大利亚");
+        acAutomaton.build();
+        acAutomaton.delete("澳大利亚");
+        acAutomaton.add("武汉");
         acAutomaton.build();
         String content = "中华人民共和国严禁与日本、美国、澳大利亚交往，他们不讲武德！";
         System.out.println(JSON.toJSONString(acAutomaton.match(content)));
