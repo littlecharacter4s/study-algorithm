@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.*;
 
 /**
+ * AC 自动机
  * @author gujixian
  * @since 2022/12/28
  */
