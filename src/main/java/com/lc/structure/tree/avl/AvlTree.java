@@ -8,7 +8,8 @@ import java.util.Optional;
 public class AvlTree<E extends Comparable<E>> {
     private TreeNode<E> root = null;
 
-    public AvlTree() {}
+    public AvlTree() {
+    }
 
     public AvlTree(TreeNode<E> root) {
         this.root = root;
