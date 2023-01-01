@@ -1,6 +1,6 @@
 package com.lc.structure.tree;
 
-import com.lc.structure.tree.rb.RedBlackTree;
+import com.lc.structure.order.RedBlackTree;
 import org.junit.Test;
 
 public class RedBlackTreeTest {

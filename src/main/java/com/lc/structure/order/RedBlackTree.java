@@ -1,4 +1,4 @@
-package com.lc.structure.tree.rb;
+package com.lc.structure.order;
 
 public class RedBlackTree<E extends Comparable<? super E>> {
     public static final int RED = 0;

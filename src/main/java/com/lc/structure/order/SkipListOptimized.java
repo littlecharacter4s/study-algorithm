@@ -1,4 +1,4 @@
-package com.lc.structure.zother;
+package com.lc.structure.order;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package com.lc.structure.tree.rb;
+package com.lc.structure.order;
 
 import java.util.Comparator;
 

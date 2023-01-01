@@ -1,4 +1,4 @@
-package com.lc.structure.tree.avl;
+package com.lc.structure.order;
 
 import com.alibaba.fastjson.JSON;
 import com.lc.structure.tree.TreeNode;

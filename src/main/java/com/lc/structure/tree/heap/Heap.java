@@ -3,7 +3,7 @@ package com.lc.structure.tree.heap;
 import java.util.Arrays;
 
 /**
- * 最小堆，是一种经过排序的完全二叉树，其中任一非终端节点的数据值均不大于其左子节点和右子节点的值
+ * 小顶堆，是一种经过排序的完全二叉树，其中任一非终端节点的数据值均不大于其左子节点和右子节点的值
  * 性质1：一棵完全二叉树
  * 性质2：父节点小于等于子节点
  * 实现思路：
@@ -14,17 +14,19 @@ import java.util.Arrays;
  *     jl = (i << 1) + 1;
  *     jr = (i << 1) + 2;
  * }
- * 注：这里以Integer类型的最小堆为例，只实现offer，peek，poll方法
+ * 注：
+ * 1、这里以Integer类型的最小堆为例，只实现offer，peek，poll方法
+ * 2、再引入个比较器，就可以同时实现大顶堆和小顶堆
  */
-public class MinHeap {
+public class Heap {
     private int[] elements;
     private int size = 0;
 
-    public MinHeap(int capacity) {
+    public Heap(int capacity) {
         this.elements = new int[capacity];
     }
 
-    public MinHeap(int[] elements) {
+    public Heap(int[] elements) {
         this.elements = elements;
         this.size = elements.length;
         this.buildHeap();
