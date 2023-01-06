@@ -12,6 +12,18 @@ package com.lc.structure.linear.chain;
  * @since 2022/7/17
  */
 public class LC0234PalindromeLinkedList {
+    public static void main(String[] args) {
+        LC0234PalindromeLinkedList palindromeLinkedList = new LC0234PalindromeLinkedList();
+        ListNode node1 = new ListNode(1);
+        ListNode node2 = new ListNode(2);
+        ListNode node3 = new ListNode(2);
+        ListNode node4 = new ListNode(1);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        System.out.println(palindromeLinkedList.isPalindrome(node1));
+    }
+    
     public boolean isPalindrome(ListNode head) {
         if (head == null || head.next == null) {
             return true;
@@ -57,7 +69,7 @@ public class LC0234PalindromeLinkedList {
         return result;
     }
 
-    static class ListNode {
+    private static class ListNode {
         int val;
         ListNode next;
         ListNode() {}

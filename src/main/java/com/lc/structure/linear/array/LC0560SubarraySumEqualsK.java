@@ -40,4 +40,10 @@ public class LC0560SubarraySumEqualsK {
         }
         return count;
     }
+
+    public static void main(String[] args) {
+        LC0560SubarraySumEqualsK subarraySumEqualsK = new LC0560SubarraySumEqualsK();
+        int[] nums = {1,2,3,3};
+        subarraySumEqualsK.subarraySum(nums, 6);
+    }
 }
