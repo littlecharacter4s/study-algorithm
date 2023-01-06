@@ -1,284 +1,271 @@
 package com.lc.structure.order;
 
 import com.alibaba.fastjson.JSON;
-import com.lc.structure.tree.TreeNode;
 
-import java.util.Optional;
+public class AvlTree<K extends Comparable<K>, V> {
+    private Node<K, V> root = null;
+    private int size;
 
-public class AvlTree<E extends Comparable<E>> {
-    private TreeNode<E> root = null;
 
     public AvlTree() {
+        root = null;
+        size = 0;
     }
 
-    public AvlTree(TreeNode<E> root) {
-        this.root = root;
-    }
-
-    public void insert(E element) {
-        root = this.insert(element, root);
-    }
-
-    public void remove(E element) {
-        root = this.remove(element, root);
-    }
-
-    public int height() {
-        return this.height(root);
-    }
-
-    private TreeNode<E> insert(E element, TreeNode<E> root) {
-        //插入的位置
-        root = Optional.ofNullable(root).orElse(new TreeNode<>(element));
-        if (element.compareTo(root.getValue()) < 0) {
-            //插入到左子树
-            root.setLeft(this.insert(element, root.getLeft()));
-            //插入之后判断是否打破了平衡
-            if (Math.abs(this.height(root.getLeft()) - this.height(root.getRight())) == 2) {
-                if (element.compareTo(root.getLeft().getValue()) < 0) {
-                    /**
-                     * LL型
-                     *****************************************
-                     *           8       *           8       *
-                     *      4         12 *      4         12 *
-                     *   2     6         *   2     6         *
-                     * x                 *     y             *
-                     *****************************************
-                     */
-                    root = this.rightRotate(root);
-                } else {
-                    /**
-                     * LR型
-                     *****************************************
-                     *           8       *           8       *
-                     *      4         12 *      4         12 *
-                     *   2     6         *   2     6         *
-                     *       x           *           y       *
-                     *****************************************
-                     */
-                    root = this.leftAndRightRotate(root);
-                }
-            }
-        } else if (element.compareTo(root.getValue()) > 0) {
-            //插入到右子树
-            root.setRight(insert(element, root.getRight()));
-            //插入之后判断是否打破了平衡
-            if (Math.abs(this.height(root.getRight()) - this.height(root.getLeft())) == 2) {
-                if (element.compareTo(root.getRight().getValue()) > 0) {
-                    /**
-                     * RR型
-                     *****************************************
-                     *      8             *      8           *
-                     * 4         12       * 4         12     *
-                     *       10      14   *       10      14 *
-                     *                  x *             y    *
-                     *****************************************
-                     */
-                    root = this.leftRotate(root);
-                } else {
-                    /**
-                     * RL型
-                     *****************************************
-                     *      8             *      8           *
-                     * 4         12       * 4         12     *
-                     *       10      14   *       10      14 *
-                     *     x              *          y       *
-                     *****************************************
-                     */
-                    root = this.rightAndLeftRotate(root);
-                }
-            }
+    
+    public void put(K key, V value) {
+        if (key == null) {
+            return;
         }
-
-        //设置节点的高度
-        root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1);
-
-        return root;
+        Node<K, V> lastNode = findLastIndex(key);
+        if (lastNode != null && key.compareTo(lastNode.key) == 0) {
+            lastNode.value = value;
+        } else {
+            size++;
+            root = add(root, key, value);
+        }
     }
 
-    private TreeNode<E> remove(E element, TreeNode<E> root) {
-        //找不到要删除的节点
+    public void remove(K key) {
+        if (key == null) {
+            return;
+        }
+        if (containsKey(key)) {
+            size--;
+            root = delete(root, key);
+        }
+    }
+
+    public boolean containsKey(K key) {
+        if (key == null) {
+            return false;
+        }
+        Node<K, V> lastNode = findLastIndex(key);
+        return lastNode != null && key.compareTo(lastNode.key) == 0 ? true : false;
+    }
+
+    public V get(K key) {
+        if (key == null) {
+            return null;
+        }
+        Node<K, V> lastNode = findLastIndex(key);
+        if (lastNode != null && key.compareTo(lastNode.key) == 0) {
+            return lastNode.value;
+        }
+        return null;
+    }
+
+    public K firstKey() {
         if (root == null) {
             return null;
         }
-        if (element.compareTo(root.getValue()) < 0) {
-            //要删除的节点在左子树中
-            root.setLeft(this.remove(element, root.getLeft()));
-            //删除之后判断是否打破了平衡
-            if (Math.abs(this.height(root.getRight()) - this.height(root.getLeft())) == 2) {
-                //因为删除的是左子树的节点，所以失衡情况只能是RX型
-                TreeNode<E> rightNode = root.getRight();
-                //根据右子树的左右深度判断失衡类型
-                if (this.height(rightNode.getLeft()) > this.height(rightNode.getRight())) {
-                    /**
-                     * RL型
-                     *****************************************
-                     *      8             *      8           *
-                     * 4         12       * 4         12     *
-                     *       10      14   *       10      14 *
-                     *     x              *          y       *
-                     *****************************************
-                     */
-                    root = this.rightAndLeftRotate(root);
-                } else {
-                    /**
-                     * RR型
-                     *****************************************
-                     *      8             *      8           *
-                     * 4         12       * 4         12     *
-                     *       10      14   *       10      14 *
-                     *                  x *             y    *
-                     *****************************************
-                     */
-                    root = this.leftRotate(root);
-                }
-            }
-        } else if (element.compareTo(root.getValue()) > 0) {
-            //要删除的节点在右子树中
-            root.setRight(this.remove(element, root.getRight()));
-            //删除之后判断是否打破了平衡
-            if (Math.abs(this.height(root.getLeft()) - this.height(root.getRight())) == 2) {
-                //因为删除的是右子树的节点，所以失衡情况只能是LX型
-                TreeNode<E> leftNode = root.getLeft();
-                //根据左子树的左右深度判断失衡类型
-                if (this.height(leftNode.getRight()) > this.height(leftNode.getLeft())) {
-                    /**
-                     * LR型
-                     *****************************************
-                     *           8       *           8       *
-                     *      4         12 *      4         12 *
-                     *   2     6         *   2     6         *
-                     *       x           *           y       *
-                     *****************************************
-                     */
-                    root = this.leftAndRightRotate(root);
-                } else {
-                    /**
-                     * LL型
-                     *****************************************
-                     *           8       *           8       *
-                     *      4         12 *      4         12 *
-                     *   2     6         *   2     6         *
-                     * x                 *     y             *
-                     *****************************************
-                     */
-                    root = this.rightRotate(root);
-                }
-            }
-        } else if (root.getLeft() != null && root.getRight() != null) {
-            //要删除的节点有两个子树，找子树中最大或最小的节点删除，是为了能最小限度地影响树的平衡
-            if (this.height(root.getLeft()) > this.height(root.getRight())) {
-                TreeNode<E> maxNode = this.maximum(root.getLeft());
-                root.setValue(maxNode.getValue());
-                root.setLeft(this.remove(maxNode.getValue(), root.getLeft()));
-            } else {
-                TreeNode<E> minNode = this.minimum(root.getRight());
-                root.setValue(minNode.getValue());
-                root.setRight(this.remove(minNode.getValue(), root.getRight()));
-            }
+        Node<K, V> cur = root;
+        while (cur.left != null) {
+            cur = cur.left;
+        }
+        return cur.key;
+    }
+
+    public K lastKey() {
+        if (root == null) {
+            return null;
+        }
+        Node<K, V> cur = root;
+        while (cur.right != null) {
+            cur = cur.right;
+        }
+        return cur.key;
+    }
+
+    public K floorKey(K key) {
+        if (key == null) {
+            return null;
+        }
+        Node<K, V> lastNoBigNode = findLastNoBigIndex(key);
+        return lastNoBigNode == null ? null : lastNoBigNode.key;
+    }
+
+    public K ceilingKey(K key) {
+        if (key == null) {
+            return null;
+        }
+        Node<K, V> lastNoSmallNode = findLastNoSmallIndex(key);
+        return lastNoSmallNode == null ? null : lastNoSmallNode.key;
+    }
+
+    public int size() {
+        return size;
+    }
+
+
+    private Node<K, V> add(Node<K, V> cur, K key, V value) {
+        if (cur == null) {
+            return new Node<K, V>(key, value);
         } else {
-            //要删除的节点小于两个子树
-            root = (root.getLeft() != null) ? root.getLeft() : root.getRight();
+            if (key.compareTo(cur.key) < 0) {
+                cur.left = add(cur.left, key, value);
+            } else {
+                cur.right = add(cur.right, key, value);
+            }
+            cur.height = Math.max(cur.left != null ? cur.left.height : 0, cur.right != null ? cur.right.height : 0) + 1;
+            return maintain(cur);
         }
+    }
 
-        //设置节点的高度
-        if (root != null) {
-            root.setHeight(Math.max(this.height(root.getLeft()), this.height(root.getRight())) + 1);
+    // 在cur这棵树上，删掉key所代表的节点
+    // 返回cur这棵树的新头部
+    private Node<K, V> delete(Node<K, V> cur, K key) {
+        if (key.compareTo(cur.key) > 0) {
+            cur.right = delete(cur.right, key);
+        } else if (key.compareTo(cur.key) < 0) {
+            cur.left = delete(cur.left, key);
+        } else {
+            if (cur.left == null && cur.right == null) {
+                cur = null;
+            } else if (cur.left == null && cur.right != null) {
+                cur = cur.right;
+            } else if (cur.left != null && cur.right == null) {
+                cur = cur.left;
+            } else {
+                Node<K, V> des = cur.right;
+                while (des.left != null) {
+                    des = des.left;
+                }
+                cur.right = delete(cur.right, des.key);
+                des.left = cur.left;
+                des.right = cur.right;
+                cur = des;
+            }
         }
-
-        return root;
-    }
-
-    //LL
-    private TreeNode<E> rightRotate(TreeNode<E> root) {
-        TreeNode<E> newRoot = root.getLeft();
-        root.setLeft(newRoot.getRight());
-        newRoot.setRight(root);
-        root.setHeight(Math.max(this.height(root.getLeft()), this.height(root.getRight())) + 1);
-        newRoot.setHeight(Math.max(height(newRoot.getLeft()), height(newRoot.getRight())) + 1);
-        return newRoot;
-    }
-
-    //RR
-    private TreeNode<E> leftRotate(TreeNode<E> root) {
-        TreeNode<E> newRoot = root.getRight();
-        root.setRight(newRoot.getLeft());
-        newRoot.setLeft(root);
-        root.setHeight(Math.max(this.height(root.getLeft()), this.height(root.getRight())) + 1);
-        newRoot.setHeight(Math.max(height(newRoot.getLeft()), height(newRoot.getRight())) + 1);
-        return newRoot;
-    }
-
-    //LR
-    private TreeNode<E> leftAndRightRotate(TreeNode<E> root) {
-        root.setLeft(this.leftRotate(root.getLeft()));
-        return rightRotate(root);
-    }
-
-    //RL
-    private TreeNode<E> rightAndLeftRotate(TreeNode<E> root) {
-        root.setRight(this.rightRotate(root.getRight()));
-        return leftRotate(root);
-    }
-
-    private int height(TreeNode<E> root) {
-        return root == null ? 0 : root.getHeight();
-    }
-
-    private TreeNode<E> minimum(TreeNode<E> root) {
-        while (root.getLeft() != null) {
-            root = root.getLeft();
+        if (cur != null) {
+            cur.height = Math.max(cur.left != null ? cur.left.height : 0, cur.right != null ? cur.right.height : 0) + 1;
         }
-
-        return root;
+        return maintain(cur);
     }
 
-    private TreeNode<E> maximum(TreeNode<E> root) {
-        while (root.getRight() != null) {
-            root = root.getRight();
+    // 查找节点，若存在，则返回，否则返回 key 应该在的位置的父节点
+    private Node<K, V> findLastIndex(K key) {
+        Node<K, V> pre = root;
+        Node<K, V> cur = root;
+        while (cur != null) {
+            pre = cur;
+            if (key.compareTo(cur.key) == 0) {
+                break;
+            } else if (key.compareTo(cur.key) < 0) {
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
         }
-
-        return root;
+        return pre;
     }
 
-    public void printTreeMiddle() {
-        this.printTreeMiddle(root);
-    }
-
-    public void printTreeMiddle(TreeNode<E> node) {
-        if (node == null) {
-            return;
+    // 查找大于等于 key 的最小节点
+    private Node<K, V> findLastNoSmallIndex(K key) {
+        Node<K, V> ans = null;
+        Node<K, V> cur = root;
+        while (cur != null) {
+            if (key.compareTo(cur.key) == 0) {
+                ans = cur;
+                break;
+            } else if (key.compareTo(cur.key) < 0) {
+                ans = cur;
+                cur = cur.left;
+            } else {
+                cur = cur.right;
+            }
         }
-        System.out.println(JSON.toJSONString(node));
-        this.printTreeMiddle(node.getLeft());
-        this.printTreeMiddle(node.getRight());
-
+        return ans;
     }
 
-    public void printTreeLeft() {
-        this.printTreeLeft(root);
-    }
-
-    public void printTreeLeft(TreeNode<E> node) {
-        if (node == null) {
-            return;
+    // 查找小于等于 key 的最大节点
+    private Node<K, V> findLastNoBigIndex(K key) {
+        Node<K, V> ans = null;
+        Node<K, V> cur = root;
+        while (cur != null) {
+            if (key.compareTo(cur.key) == 0) {
+                ans = cur;
+                break;
+            } else if (key.compareTo(cur.key) < 0) {
+                cur = cur.left;
+            } else {
+                ans = cur;
+                cur = cur.right;
+            }
         }
-        this.printTreeLeft(node.getLeft());
-        System.out.println(JSON.toJSONString(node));
-        this.printTreeLeft(node.getRight());
-
+        return ans;
     }
 
-    public void printTreeRight() {
-        this.printTreeRight(root);
-    }
-
-    public void printTreeRight(TreeNode<E> node) {
-        if (node == null) {
-            return;
+    private Node<K, V> maintain(Node<K, V> cur) {
+        if (cur == null) {
+            return null;
         }
-        this.printTreeRight(node.getRight());
-        System.out.println(JSON.toJSONString(node));
-        this.printTreeRight(node.getLeft());
+        int leftHeight = cur.left != null ? cur.left.height : 0;
+        int rightHeight = cur.right != null ? cur.right.height : 0;
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            if (leftHeight > rightHeight) {
+                int leftLeftHeight = cur.left != null && cur.left.left != null ? cur.left.left.height : 0;
+                int leftRightHeight = cur.left != null && cur.left.right != null ? cur.left.right.height : 0;
+                if (leftLeftHeight >= leftRightHeight) {
+                    cur = rightRotate(cur);
+                } else {
+                    cur.left = leftRotate(cur.left);
+                    cur = rightRotate(cur);
+                }
+            } else {
+                int rightLeftHeight = cur.right != null && cur.right.left != null ? cur.right.left.height : 0;
+                int rightRightHeight = cur.right != null && cur.right.right != null ? cur.right.right.height : 0;
+                if (rightRightHeight >= rightLeftHeight) {
+                    cur = leftRotate(cur);
+                } else {
+                    cur.right = rightRotate(cur.right);
+                    cur = leftRotate(cur);
+                }
+            }
+        }
+        return cur;
+    }
+
+    private Node<K, V> rightRotate(Node<K, V> cur) {
+        Node<K, V> left = cur.left;
+        cur.left = left.right;
+        left.right = cur;
+        cur.height = Math.max((cur.left != null ? cur.left.height : 0), (cur.right != null ? cur.right.height : 0)) + 1;
+        left.height = Math.max((left.left != null ? left.left.height : 0), (left.right != null ? left.right.height : 0)) + 1;
+        return left;
+    }
+
+    private Node<K, V> leftRotate(Node<K, V> cur) {
+        Node<K, V> right = cur.right;
+        cur.right = right.left;
+        right.left = cur;
+        cur.height = Math.max((cur.left != null ? cur.left.height : 0), (cur.right != null ? cur.right.height : 0)) + 1;
+        right.height = Math.max((right.left != null ? right.left.height : 0), (right.right != null ? right.right.height : 0)) + 1;
+        return right;
+    }
+    
+
+    public static class Node<K extends Comparable<K>, V> {
+        public K key;
+        public V value;
+        public Node<K, V> left;
+        public Node<K, V> right;
+        public int height;
+
+        public Node(K key, V value) {
+            this.key = key;
+            this.value = value;
+            this.height = 1;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        AvlTree<Integer, String> tree = new AvlTree<>();
+        tree.put(1, "a");
+        tree.put(2, "b");
+        tree.put(3, "c");
+        tree.remove(2);
+        System.out.println(JSON.toJSONString(tree.root));
     }
 }
