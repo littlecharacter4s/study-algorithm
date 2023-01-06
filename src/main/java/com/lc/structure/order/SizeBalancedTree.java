@@ -1,5 +1,7 @@
 package com.lc.structure.order;
 
+import java.util.TreeMap;
+
 /**
  * SB 树（SizeBalancedTree）
  *
@@ -36,7 +38,7 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
             throw new RuntimeException("invalid parameter.");
         }
         Node<K, V> lastNode = findLastIndex(key);
-        return lastNode != null && key.compareTo(lastNode.key) == 0 ? true : false;
+        return lastNode != null && key.compareTo(lastNode.key) == 0;
     }
 
     public V get(K key) {
@@ -135,15 +137,16 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
             cur.left = delete(cur.left, key);
         } else { // 当前要删掉cur
             if (cur.left == null && cur.right == null) {
-                // free cur memory -> C++
+                // 无左无右
                 cur = null;
             } else if (cur.left == null && cur.right != null) {
-                // free cur memory -> C++
+                // 无左有右
                 cur = cur.right;
             } else if (cur.left != null && cur.right == null) {
-                // free cur memory -> C++
+                // 有左无右
                 cur = cur.left;
-            } else { // 有左有右
+            } else {
+                // 有左有右 -> 找到后继节点删掉
                 Node<K, V> pre = null;
                 Node<K, V> des = cur.right;
                 des.size--;
@@ -158,11 +161,10 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
                 }
                 des.left = cur.left;
                 des.size = des.left.size + (des.right == null ? 0 : des.right.size) + 1;
-                // free cur memory -> C++
                 cur = des;
             }
         }
-        // cur = maintain(cur);
+        // cur = maintain(cur); // 删除的时候可以允许不调整
         return cur;
     }
 
@@ -176,11 +178,12 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
         }
     }
 
+    // 查找节点，若存在，则返回，否则返回 key 应该在的位置的父节点
     private Node<K, V> findLastIndex(K key) {
-        Node<K, V> pre = root;
+        Node<K, V> ans = root;
         Node<K, V> cur = root;
         while (cur != null) {
-            pre = cur;
+            ans = cur;
             if (key.compareTo(cur.key) == 0) {
                 break;
             } else if (key.compareTo(cur.key) < 0) {
@@ -189,9 +192,10 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
                 cur = cur.right;
             }
         }
-        return pre;
+        return ans;
     }
 
+    // 查找大于等于 key 的最小节点
     private Node<K, V> findLastNoSmallIndex(K key) {
         Node<K, V> ans = null;
         Node<K, V> cur = root;
@@ -209,6 +213,7 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
         return ans;
     }
 
+    // 查找小于等于 key 的最大节点
     private Node<K, V> findLastNoBigIndex(K key) {
         Node<K, V> ans = null;
         Node<K, V> cur = root;
@@ -236,21 +241,26 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
         int rightSize = cur.right != null ? cur.right.size : 0;
         int rightLeftSize = cur.right != null && cur.right.left != null ? cur.right.left.size : 0;
         int rightRightSize = cur.right != null && cur.right.right != null ? cur.right.right.size : 0;
+        // LL、LR、RR、RL
         if (leftLeftSize > rightSize) {
+            // LL
             cur = rightRotate(cur);
             cur.right = maintain(cur.right);
             cur = maintain(cur);
         } else if (leftRightSize > rightSize) {
+            // LR
             cur.left = leftRotate(cur.left);
             cur = rightRotate(cur);
             cur.left = maintain(cur.left);
             cur.right = maintain(cur.right);
             cur = maintain(cur);
         } else if (rightRightSize > leftSize) {
+            // RR
             cur = leftRotate(cur);
             cur.left = maintain(cur.left);
             cur = maintain(cur);
         } else if (rightLeftSize > leftSize) {
+            // RL
             cur.right = rightRotate(cur.right);
             cur = leftRotate(cur);
             cur.left = maintain(cur.left);
@@ -296,6 +306,7 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
 
 
     public static void main(String[] args) {
+        TreeMap treeMap;
         SizeBalancedTree<String , Integer> sbTree = new SizeBalancedTree<>();
         sbTree.put("a", 1);
         sbTree.put("b", 2);
