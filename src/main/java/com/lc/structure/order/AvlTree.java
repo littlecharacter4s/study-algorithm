@@ -2,6 +2,12 @@ package com.lc.structure.order;
 
 import com.alibaba.fastjson.JSON;
 
+/**
+ * AVL 树
+ *
+ * @author gujixian
+ * @since 2023/1/2
+ */
 public class AvlTree<K extends Comparable<K>, V> {
     private Node<K, V> root = null;
     private int size;
