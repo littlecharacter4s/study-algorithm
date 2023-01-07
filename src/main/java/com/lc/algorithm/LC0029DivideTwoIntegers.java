@@ -15,6 +15,11 @@ package com.lc.algorithm;
  * @since 2022/7/23
  */
 public class LC0029DivideTwoIntegers {
+    public static void main(String[] args) {
+        LC0029DivideTwoIntegers divideTwoIntegers = new LC0029DivideTwoIntegers();
+        System.out.println(divideTwoIntegers.divide(2147483647, 3));
+    }
+
     public int divide(int a, int b) {
         if (a == Integer.MIN_VALUE && b == -1) {
             return Integer.MAX_VALUE;
