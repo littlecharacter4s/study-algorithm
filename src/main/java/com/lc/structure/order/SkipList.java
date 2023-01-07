@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * @since 2023/1/2
  */
 public class SkipList<K extends Comparable<K>, V> {
+    // 每次 roll 层数 +1 的概率
     private static final double PROBABILITY = 0.5;
 
     private Node<K, V> head;
