@@ -1,9 +1,17 @@
 package com.lc.algorithm;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LC0078Subsets {
+    public static void main(String[] args) {
+        int[] nums = new int[]{1,2,3};
+        List<List<Integer>> result = new LC0078Subsets().subsets(nums);
+        System.out.println(JSON.toJSONString(result));
+    }
+
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         if (nums == null || nums.length == 0) {

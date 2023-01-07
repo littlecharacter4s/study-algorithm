@@ -1,5 +1,7 @@
 package com.lc.algorithm;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +10,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class LC0187RepeatedDNASequences {
+    public static void main(String[] args) {
+        String s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
+        List<String> result = new LC0187RepeatedDNASequences().findRepeatedDnaSequences(s);
+        System.out.println("原串：" + s);
+        System.out.println("结果：" + JSON.toJSONString(result));
+    }
+
     public List<String> findRepeatedDnaSequences(String s) {
         List<String> result = new ArrayList<>();
         Map<String, Integer> sequenceMap = new HashMap<>();

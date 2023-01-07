@@ -7,6 +7,12 @@ import java.util.HashSet;
  * 用{011,101,110}和{101,110,111}来理解，一点点确定最大值（从高位到地位）
  */
 public class LC0421MaximumXORofTwoNumbersInAnArray {
+    public static void main(String[] args) {
+        int[] nums = new int[]{3,10,5,25,26,8};
+        int result = new LC0421MaximumXORofTwoNumbersInAnArray().findMaximumXOR(nums);
+        System.out.println("result = " + result);
+    }
+
     public int findMaximumXOR(int[] nums) {
         int max = 0;
         int mask = 0;
