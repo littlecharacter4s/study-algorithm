@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class SkipList<K extends Comparable<K>, V> {
     // 每次 roll 层数 +1 的概率
+    // -> Redis 的概率为 0.25，但是其 head 节点的层数固定 32 层
     private static final double PROBABILITY = 0.5;
 
     private Node<K, V> head;
