@@ -307,7 +307,7 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
 
     public static void main(String[] args) {
         TreeMap treeMap;
-        SizeBalancedTree<String , Integer> sbTree = new SizeBalancedTree<>();
+        SizeBalancedTree<String, Integer> sbTree = new SizeBalancedTree<>();
         sbTree.put("a", 1);
         sbTree.put("b", 2);
         sbTree.put("c", 3);
