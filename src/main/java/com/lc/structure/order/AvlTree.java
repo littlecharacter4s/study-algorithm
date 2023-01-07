@@ -23,7 +23,7 @@ public class AvlTree<K extends Comparable<K>, V> {
         if (key == null) {
             return;
         }
-        Node<K, V> lastNode = findLastIndex(key);
+        Node<K, V> lastNode = findNodeOrPre(key);
         if (lastNode != null && key.compareTo(lastNode.key) == 0) {
             lastNode.value = value;
         } else {
@@ -46,7 +46,7 @@ public class AvlTree<K extends Comparable<K>, V> {
         if (key == null) {
             return false;
         }
-        Node<K, V> lastNode = findLastIndex(key);
+        Node<K, V> lastNode = findNodeOrPre(key);
         return lastNode != null && key.compareTo(lastNode.key) == 0 ? true : false;
     }
 
@@ -54,7 +54,7 @@ public class AvlTree<K extends Comparable<K>, V> {
         if (key == null) {
             return null;
         }
-        Node<K, V> lastNode = findLastIndex(key);
+        Node<K, V> lastNode = findNodeOrPre(key);
         if (lastNode != null && key.compareTo(lastNode.key) == 0) {
             return lastNode.value;
         }
@@ -87,7 +87,7 @@ public class AvlTree<K extends Comparable<K>, V> {
         if (key == null) {
             return null;
         }
-        Node<K, V> lastNoBigNode = findLastNoBigIndex(key);
+        Node<K, V> lastNoBigNode = findLastSmallerOrEqualNode(key);
         return lastNoBigNode == null ? null : lastNoBigNode.key;
     }
 
@@ -95,7 +95,7 @@ public class AvlTree<K extends Comparable<K>, V> {
         if (key == null) {
             return null;
         }
-        Node<K, V> lastNoSmallNode = findLastNoSmallIndex(key);
+        Node<K, V> lastNoSmallNode = findFirstBiggerOrEqualNode(key);
         return lastNoSmallNode == null ? null : lastNoSmallNode.key;
     }
 
@@ -150,7 +150,7 @@ public class AvlTree<K extends Comparable<K>, V> {
     }
 
     // 查找节点，若存在，则返回，否则返回 key 应该在的位置的父节点
-    private Node<K, V> findLastIndex(K key) {
+    private Node<K, V> findNodeOrPre(K key) {
         Node<K, V> pre = root;
         Node<K, V> cur = root;
         while (cur != null) {
@@ -167,7 +167,7 @@ public class AvlTree<K extends Comparable<K>, V> {
     }
 
     // 查找大于等于 key 的最小节点
-    private Node<K, V> findLastNoSmallIndex(K key) {
+    private Node<K, V> findFirstBiggerOrEqualNode(K key) {
         Node<K, V> ans = null;
         Node<K, V> cur = root;
         while (cur != null) {
@@ -185,7 +185,7 @@ public class AvlTree<K extends Comparable<K>, V> {
     }
 
     // 查找小于等于 key 的最大节点
-    private Node<K, V> findLastNoBigIndex(K key) {
+    private Node<K, V> findLastSmallerOrEqualNode(K key) {
         Node<K, V> ans = null;
         Node<K, V> cur = root;
         while (cur != null) {
