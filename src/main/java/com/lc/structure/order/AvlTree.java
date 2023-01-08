@@ -127,12 +127,16 @@ public class AvlTree<K extends Comparable<K>, V> {
             cur.left = delete(cur.left, key);
         } else {
             if (cur.left == null && cur.right == null) {
+                // 无左无右
                 cur = null;
             } else if (cur.left == null && cur.right != null) {
+                // 无左有右
                 cur = cur.right;
             } else if (cur.left != null && cur.right == null) {
+                // 有左无右
                 cur = cur.left;
             } else {
+                // 有左有右 -> 找到后继节点删掉
                 Node<K, V> des = cur.right;
                 while (des.left != null) {
                     des = des.left;
