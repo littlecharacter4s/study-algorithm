@@ -14,11 +14,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class BaseTest {
     @Test
     public void test() {
-        this.testStack();
-        // this.testGraph();
+        System.out.println("这只是一个测试！");
     }
 
-    private void testStack() {
+
+    @Test
+    public void testStack() {
         // 这个test的目的是，切记：递归的过程中是可以记录一些东西的！！！
         Deque<Integer> stack = new LinkedList<>(Arrays.asList(1, 2, 3));
         System.out.println(stack);
@@ -45,7 +46,9 @@ public class BaseTest {
         return bottom;
     }
 
-    private void testGraph() {
+
+    @Test
+    public void testGraph() {
         Integer[][] matrix = new Integer[3][3];
         matrix[0][0] = 0;
         matrix[0][1] = 1;
