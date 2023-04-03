@@ -1,5 +1,6 @@
 package com.lc.structure.linear.stack;
 
+import com.alibaba.fastjson.JSON;
 import javafx.util.Pair;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,5 +55,18 @@ public class MonotonicStackForInterview<V> {
             }
         }
         return featureMap;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{2,1,5,6,2,3};
+        MonotonicStackForInterview<Integer> monotonicStack = new MonotonicStackForInterview<>((o1, o2) -> o1 - o2, nums.length);
+        Map<Integer, Pair<Integer, Integer>> featureMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            Map<Integer, Pair<Integer, Integer>> subFeatureMap = monotonicStack.push(i, nums[i]);
+            if (!subFeatureMap.isEmpty()) {
+                subFeatureMap.forEach(featureMap::put);
+            }
+        }
+        System.out.println(JSON.toJSONString(featureMap));
     }
 }
