@@ -1,4 +1,4 @@
-package com.lc.structure.string;
+package com.lc.structure.zother.string;
 
 /**
  * 题目：回文子串数量

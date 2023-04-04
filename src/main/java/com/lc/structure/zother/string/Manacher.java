@@ -1,4 +1,4 @@
-package com.lc.structure.string;
+package com.lc.structure.zother.string;
 
 import com.alibaba.fastjson.JSON;
 
